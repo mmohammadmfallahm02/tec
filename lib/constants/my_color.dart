@@ -9,6 +9,7 @@ class SolidColors {
   static const Color submitArticle = Color.fromARGB(255, 209, 209, 209);
   static const Color submitPodcast = Color.fromARGB(255, 246, 246, 246);
   static const Color subText = Color.fromARGB(255, 197, 197, 197);
+  static const Color primaryColor = Color.fromARGB(255, 68, 4, 87);
 }
 
 class GradiantColors {
