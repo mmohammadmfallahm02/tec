@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale('fa', ''),//farsi
+        Locale('fa', ''), //farsi
       ],
       title: 'Flutter Demo',
       theme: ThemeData(
