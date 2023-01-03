@@ -11,7 +11,7 @@ class MainScreen extends StatelessWidget {
         child: Scaffold(
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Center(
-          child: Text('Main Screen'),
+          child: Text('Main Screen',style: TextStyle(fontSize: 2),),
         )
       ]),
     ));
