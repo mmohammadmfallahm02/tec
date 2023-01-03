@@ -15,8 +15,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    Future.delayed(Duration(seconds: 3)).then((value) => Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const MainScreen())));
+    Future.delayed(const Duration(seconds: 3)).then((value) =>
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (context) => const MainScreen())));
     super.initState();
   }
 
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(child: Assets.images.logo.image(height: 64)),
-            SizedBox(
+            const SizedBox(
               height: 32,
             ),
             const SpinKitFadingCube(
