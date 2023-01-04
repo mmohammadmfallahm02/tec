@@ -37,7 +37,11 @@ class MainScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18),
                   image: DecorationImage(
                       fit: BoxFit.cover,
+<<<<<<< HEAD
                       image: AssetImage(homePagePosterMap['ImageAssets'])),
+=======
+                      image: (Assets.images.posterTest.image()).image),
+>>>>>>> 59b7393e6ebf945eafb11313934b545f4054c12c
                 ),
                 foregroundDecoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
@@ -59,6 +63,7 @@ class MainScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
+<<<<<<< HEAD
                               "${homePagePosterMap["writer"]}  -  ${homePagePosterMap["date"]}",
                               style: themeData.textTheme.subtitle1,
                             ),
@@ -80,6 +85,17 @@ class MainScreen extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         softWrap: false,
                         textAlign:TextAlign.center,
+=======
+                              'ملیکا عزیزی - یک روز پیش',
+                              style: themeData.textTheme.subtitle1,
+                            ),
+                            Text('Like 253',
+                                style: themeData.textTheme.subtitle1)
+                          ]),
+                          const SizedBox(height: 8,),
+                      Text(
+                        'دوازده قدم برنامه نویسی یک دوره ی...س',
+>>>>>>> 59b7393e6ebf945eafb11313934b545f4054c12c
                         style: themeData.textTheme.headline1,
                       )
                     ],

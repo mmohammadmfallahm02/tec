@@ -36,7 +36,11 @@ class MyApp extends StatelessWidget {
             textTheme: const TextTheme(
               headline1: TextStyle(
                 fontFamily: 'dana',
+<<<<<<< HEAD
                 fontSize: 18,
+=======
+                fontSize: 16,
+>>>>>>> 59b7393e6ebf945eafb11313934b545f4054c12c
                 color: SolidColors.posterTitle,
                 fontWeight: FontWeight.w700,
               ),
