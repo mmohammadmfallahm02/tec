@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:tec/constants/my_color.dart';
 import 'package:tec/gen/assets.gen.dart';
+import 'package:tec/models/fake_data.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -8,6 +11,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    final ThemeData themeData = Theme.of(context);
     // TODO: implement build
     return SafeArea(
         child: Scaffold(
@@ -27,29 +31,61 @@ class MainScreen extends StatelessWidget {
           Stack(
             children: [
               Container(
-                width: size.width / 1.19,
-                height: size.height / 4.2,
+                width: size.width / 1.13,
+                height: size.height / 4.3,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    image: DecorationImage(
+                  borderRadius: BorderRadius.circular(18),
+                  image: DecorationImage(
                       fit: BoxFit.cover,
-                        image: (Assets.images.posterTest.image()).image),),
-                        
-              ),
-              Container(
-                width: size.width / 1.19,
-                height: size.height / 4.2,
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                gradient: const LinearGradient(
+                      image: AssetImage(homePagePosterMap['ImageAssets'])),
+                ),
+                foregroundDecoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
+                  gradient: const LinearGradient(
                     colors: GradiantColors.homePosterCoverGradiant,
                     begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter)),
-          ),
-             
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+              ),
+              Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 16,
+                  child: Column(
+                    children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${homePagePosterMap["writer"]}  -  ${homePagePosterMap["date"]}",
+                              style: themeData.textTheme.subtitle1,
+                            ),
+                            Row(
+                              children: [
+                                
+                                Text(homePagePosterMap["view"],
+                                    style: themeData.textTheme.subtitle1),
+                                    const SizedBox(width: 8,),
+                                    const Icon(Icons.remove_red_eye_sharp,color: Colors.white,size: 16,),
+                              ],
+                            )
+                          ]),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        homePagePosterMap["title"],
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        textAlign:TextAlign.center,
+                        style: themeData.textTheme.headline1,
+                      )
+                    ],
+                  ))
             ],
           ),
-           
         ],
       ),
     ));
