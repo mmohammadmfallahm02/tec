@@ -8,6 +8,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    final ThemeData themeData = Theme.of(context);
     // TODO: implement build
     return SafeArea(
         child: Scaffold(
@@ -27,29 +28,49 @@ class MainScreen extends StatelessWidget {
           Stack(
             children: [
               Container(
-                width: size.width / 1.19,
-                height: size.height / 4.2,
+                width: size.width / 1.13,
+                height: size.height / 4.3,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    image: DecorationImage(
+                  borderRadius: BorderRadius.circular(18),
+                  image: DecorationImage(
                       fit: BoxFit.cover,
-                        image: (Assets.images.posterTest.image()).image),),
-                        
-              ),
-              Container(
-                width: size.width / 1.19,
-                height: size.height / 4.2,
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                gradient: const LinearGradient(
+                      image: (Assets.images.posterTest.image()).image),
+                ),
+                foregroundDecoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
+                  gradient: const LinearGradient(
                     colors: GradiantColors.homePosterCoverGradiant,
                     begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter)),
-          ),
-             
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+              ),
+              Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 16,
+                  child: Column(
+                    children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'ملیکا عزیزی - یک روز پیش',
+                              style: themeData.textTheme.subtitle1,
+                            ),
+                            Text('Like 253',
+                                style: themeData.textTheme.subtitle1)
+                          ]),
+                          const SizedBox(height: 8,),
+                      Text(
+                        'دوازده قدم برنامه نویسی یک دوره ی...س',
+                        style: themeData.textTheme.headline1,
+                      )
+                    ],
+                  ))
             ],
           ),
-           
         ],
       ),
     ));
