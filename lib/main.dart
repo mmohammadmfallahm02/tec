@@ -36,11 +36,7 @@ class MyApp extends StatelessWidget {
             textTheme: const TextTheme(
               headline1: TextStyle(
                 fontFamily: 'dana',
-<<<<<<< HEAD
                 fontSize: 18,
-=======
-                fontSize: 16,
->>>>>>> 59b7393e6ebf945eafb11313934b545f4054c12c
                 color: SolidColors.posterTitle,
                 fontWeight: FontWeight.w700,
               ),
@@ -50,14 +46,14 @@ class MyApp extends StatelessWidget {
                 color: SolidColors.posterSubTitle,
                 fontWeight: FontWeight.w300,
               ),
-              bodyText1: TextStyle(
-                  fontFamily: 'dana',
-                  fontSize: 13,
-                  fontWeight: FontWeight.w300),
               headline2: TextStyle(
                   fontFamily: 'dana',
                   fontSize: 14,
                   color: Colors.white,
+                  fontWeight: FontWeight.w300),
+              bodyText1: TextStyle(
+                  fontFamily: 'dana',
+                  fontSize: 13,
                   fontWeight: FontWeight.w300),
               headline3: TextStyle(
                   fontFamily: 'dana',
