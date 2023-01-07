@@ -2,9 +2,9 @@ import 'package:flutter/animation.dart';
 
 class SolidColors {
   static const Color primaryColor = Color.fromARGB(255, 68, 4, 87);
-  static const Color posterTitle =Color.fromARGB(255, 255, 255, 255);
-  static const Color posterSubTitle =Color.fromARGB(200, 255, 255, 255);
-  static const Color titleColor = Color.fromARGB(255, 40, 107, 184);
+  static const Color posterTitle = Color.fromARGB(255, 255, 255, 255);
+  static const Color posterSubTitle = Color.fromARGB(200, 255, 255, 255);
+  static const Color seeMore = Color.fromARGB(255, 40, 107, 184);
   static const Color textColor = Color.fromARGB(255, 0, 0, 0);
   static const Color scaffoldBg = Color.fromARGB(255, 255, 255, 255);
   static const Color statusBarColor = Color.fromARGB(255, 255, 255, 255);
@@ -30,5 +30,10 @@ class GradiantColors {
     Color.fromARGB(0, 0, 0, 0),
     Color.fromARGB(130, 72, 20, 88),
     Color.fromARGB(255, 28, 20, 81),
+  ];
+  static const List<Color> blogPostGradint = [
+    Color.fromARGB(255, 0, 0, 0),
+    Color.fromARGB(50, 0, 0, 0),
+    Color.fromARGB(0, 0, 0, 0)
   ];
 }
