@@ -36,4 +36,8 @@ class GradiantColors {
     Color.fromARGB(50, 0, 0, 0),
     Color.fromARGB(0, 0, 0, 0)
   ];
+  static const List<Color> bottomNavBackground = [
+    Color.fromARGB(255, 255, 255, 255),
+    Color.fromARGB(0, 255, 255, 255)
+  ];
 }

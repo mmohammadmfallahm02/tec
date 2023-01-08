@@ -18,6 +18,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/hashtag.png
   AssetGenImage get hashtag => const AssetGenImage('assets/icons/hashtag.png');
 
+  /// File path: assets/icons/home.png
+  AssetGenImage get home => const AssetGenImage('assets/icons/home.png');
+
   /// File path: assets/icons/menu.png
   AssetGenImage get menu => const AssetGenImage('assets/icons/menu.png');
 
@@ -28,8 +31,15 @@ class $AssetsIconsGen {
   /// File path: assets/icons/search.png
   AssetGenImage get search => const AssetGenImage('assets/icons/search.png');
 
+  /// File path: assets/icons/user.png
+  AssetGenImage get user => const AssetGenImage('assets/icons/user.png');
+
+  /// File path: assets/icons/write.png
+  AssetGenImage get write => const AssetGenImage('assets/icons/write.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [bluePen, hashtag, menu, microphon, search];
+  List<AssetGenImage> get values =>
+      [bluePen, hashtag, home, menu, microphon, search, user, write];
 }
 
 class $AssetsImagesGen {

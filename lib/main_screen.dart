@@ -23,39 +23,72 @@ class MainScreen extends StatelessWidget {
         elevation: 0,
         title: HomeAppBar(bodyMargin: bodyMargin, size: size),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 26,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 26,
+                ),
+                // poster
+                HomePoster(size: size, themeData: themeData),
+                const SizedBox(
+                  height: 32,
+                ),
+                // tag list
+                TagList(bodyMargin: bodyMargin, themeData: themeData),
+                // see more
+                SeeMore(
+                  bodyMargin: bodyMargin,
+                  themeData: themeData,
+                  icon: Assets.icons.bluePen.image().image,
+                  title: MyStrings.viewHotestBlog,
+                ),
+                // blog list
+                BlogList(size: size, bodyMargin: bodyMargin, themeData: themeData),
+                SeeMore(
+                  bodyMargin: bodyMargin,
+                  themeData: themeData,
+                  icon: Assets.icons.microphon.image().image,
+                  title: MyStrings.viewHotestPodCasts,
+                ),
+                PodcastList(
+                    size: size, bodyMargin: bodyMargin, themeData: themeData),
+              ],
             ),
-            // poster
-            HomePoster(size: size, themeData: themeData),
-            const SizedBox(
-              height: 32,
-            ),
-            // tag list
-            TagList(bodyMargin: bodyMargin, themeData: themeData),
-            // see more
-            SeeMore(
-              bodyMargin: bodyMargin,
-              themeData: themeData,
-              icon: Assets.icons.bluePen.image().image,
-              title: MyStrings.viewHotestBlog,
-            ),
-            // blog list
-            BlogList(size: size, bodyMargin: bodyMargin, themeData: themeData),
-            SeeMore(
-              bodyMargin: bodyMargin,
-              themeData: themeData,
-              icon: Assets.icons.microphon.image().image,
-              title: MyStrings.viewHotestPodCasts,
-            ),
-            PodcastList(
-                size: size, bodyMargin: bodyMargin, themeData: themeData),
-          ],
-        ),
+          ),
+           Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+             child: Container(
+                   height: size.height / 10,
+                   decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  colors: GradiantColors.bottomNavBackground,
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter)),
+                   child: Padding(
+                     padding: const EdgeInsets.fromLTRB(48, 8, 48, 8),
+                     child: Container(
+                     
+              height: size.height / 8,
+              decoration:  BoxDecoration(
+                  gradient: const LinearGradient(colors: GradiantColors.bottomNav),
+                  borderRadius: BorderRadius.circular(16)),
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
+                IconButton(onPressed: () {}, icon: Assets.icons.home.image()),
+                IconButton(onPressed: () {}, icon: Assets.icons.write.image()),
+                IconButton(onPressed: () {}, icon: Assets.icons.user.image()),
+              ]),
+                     ),
+                   ),
+                 ),
+           ),
+        ],
       ),
+     
     ));
   }
 }
