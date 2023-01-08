@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:tec/constants/my_color.dart';
 import 'package:tec/constants/my_strings.dart';
@@ -16,118 +18,218 @@ class MainScreen extends StatelessWidget {
     // TODO: implement build
     return SafeArea(
         child: Scaffold(
-      body: Column(
-        children: [
-          // appbar
-          HomeAppBar(bodyMargin: bodyMargin, size: size),
-          // poster
-          HomePoster(size: size, themeData: themeData),
-          const SizedBox(
-            height: 46,
-          ),
-          // tag list
-          TagList(bodyMargin: bodyMargin, themeData: themeData),
-          // see more
-          Padding(
-            padding: EdgeInsets.only(right: bodyMargin, top: 40, bottom: 8),
-            child: Row(
-              children: [
-                ImageIcon(
-                  Assets.icons.bluePen.image().image,
-                  color: SolidColors.seeMore,
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Text(MyStrings.viewHotestBlog,
-                    style: themeData.textTheme.headline3),
-              ],
+      appBar: AppBar(
+        backgroundColor: SolidColors.scaffoldBg,
+        elevation: 0,
+        title: HomeAppBar(bodyMargin: bodyMargin, size: size),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 26,
             ),
-          ),
-          // blog list
-          SizedBox(
-            height: size.height / 4.1,
-            child: ListView.builder(
-                itemCount: blogList.getRange(0, 5).length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  final blog = blogList[index];
-                  // blog item
-                  return Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        4, 8, index == 0 ? bodyMargin : 16, 0),
-                    child: Column(
+            // poster
+            HomePoster(size: size, themeData: themeData),
+            const SizedBox(
+              height: 32,
+            ),
+            // tag list
+            TagList(bodyMargin: bodyMargin, themeData: themeData),
+            // see more
+            SeeMore(
+              bodyMargin: bodyMargin,
+              themeData: themeData,
+              icon: Assets.icons.bluePen.image().image,
+              title: MyStrings.viewHotestBlog,
+            ),
+            // blog list
+            BlogList(size: size, bodyMargin: bodyMargin, themeData: themeData),
+            SeeMore(
+              bodyMargin: bodyMargin,
+              themeData: themeData,
+              icon: Assets.icons.microphon.image().image,
+              title: MyStrings.viewHotestPodCasts,
+            ),
+            PodcastList(
+                size: size, bodyMargin: bodyMargin, themeData: themeData),
+          ],
+        ),
+      ),
+    ));
+  }
+}
+
+class PodcastList extends StatelessWidget {
+  const PodcastList(
+      {super.key,
+      required this.size,
+      required this.bodyMargin,
+      required this.themeData});
+  final Size size;
+  final double bodyMargin;
+  final ThemeData themeData;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: size.height / 4.5,
+      child: ListView.builder(
+          itemCount: 10,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding:
+                  EdgeInsets.fromLTRB(4, 8, index == 0 ? bodyMargin : 16, 8),
+              child: Column(
+                children: [
+                  Container(
+                    height: size.height / 6.5,
+                    width: size.width / 3.2,
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(18)),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text('podcast $index')
+                ],
+              ),
+            );
+          }),
+    );
+  }
+}
+
+class BlogList extends StatelessWidget {
+  const BlogList({
+    Key? key,
+    required this.size,
+    required this.bodyMargin,
+    required this.themeData,
+  }) : super(key: key);
+
+  final Size size;
+  final double bodyMargin;
+  final ThemeData themeData;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: size.height / 4.1,
+      child: ListView.builder(
+          itemCount: blogList.getRange(0, 5).length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            final blog = blogList[index];
+            // blog item
+            return Padding(
+              padding:
+                  EdgeInsets.fromLTRB(4, 8, index == 0 ? bodyMargin : 16, 8),
+              child: Column(
+                children: [
+                  // blog post image
+                  SizedBox(
+                    height: size.height / 5.9,
+                    width: size.width / 2.6,
+                    child: Stack(
                       children: [
-                        SizedBox(
-                          height: size.height / 5.7,
-                          width: size.width / 2.6,
-                          child: Stack(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                        blog.imageUrl,
-                                      ),
-                                      fit: BoxFit.cover),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                  blog.imageUrl,
                                 ),
-                                foregroundDecoration: BoxDecoration(
-                                    gradient: const LinearGradient(
-                                        colors: GradiantColors.blogPostGradint,
-                                        begin: Alignment.bottomCenter,
-                                        end: Alignment.topCenter),
-                                    borderRadius: BorderRadius.circular(16)),
-                              ),
-                              Positioned(
-                                  bottom: 8,
-                                  left: 0,
-                                  right: 0,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(blog.writer,
-                                          style: themeData.textTheme.subtitle1),
-                                      Row(
-                                        children: [
-                                          Text(blog.views,
-                                              style: themeData
-                                                  .textTheme.subtitle1),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          const Icon(
-                                            Icons.remove_red_eye_sharp,
-                                            color: Colors.white,
-                                            size: 16,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ))
-                            ],
+                                fit: BoxFit.cover),
                           ),
+                          foregroundDecoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                  colors: GradiantColors.blogPostGradint,
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter),
+                              borderRadius: BorderRadius.circular(16)),
                         ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        SizedBox(
-                            width: size.width / 2.6,
-                            child: Text(
-                              blog.title,
-                              maxLines: 2,
-                              // textAlign: TextAlign.justify,
-                              overflow: TextOverflow.ellipsis,
+                        Positioned(
+                            bottom: 8,
+                            left: 0,
+                            right: 0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(blog.writer,
+                                    style: themeData.textTheme.subtitle1),
+                                Row(
+                                  children: [
+                                    Text(blog.views,
+                                        style: themeData.textTheme.subtitle1),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    const Icon(
+                                      Icons.remove_red_eye_sharp,
+                                      color: Colors.white,
+                                      size: 16,
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ))
                       ],
                     ),
-                  );
-                }),
-          )
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  // blog post text
+                  SizedBox(
+                      width: size.width / 2.6,
+                      child: Text(
+                        blog.title,
+                        maxLines: 2,
+                        // textAlign: TextAlign.justify,
+                        overflow: TextOverflow.ellipsis,
+                      ))
+                ],
+              ),
+            );
+          }),
+    );
+  }
+}
+
+class SeeMore extends StatelessWidget {
+  final ImageProvider<Object> icon;
+  final String title;
+  const SeeMore({
+    Key? key,
+    required this.bodyMargin,
+    required this.themeData,
+    required this.icon,
+    required this.title,
+  }) : super(key: key);
+
+  final double bodyMargin;
+  final ThemeData themeData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(right: bodyMargin, top: 25, bottom: 8),
+      child: Row(
+        children: [
+          ImageIcon(
+            icon,
+            color: SolidColors.seeMore,
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Text(title, style: themeData.textTheme.headline3),
         ],
       ),
-    ));
+    );
   }
 }
 
@@ -151,9 +253,14 @@ class HomeAppBar extends StatelessWidget {
           ImageIcon(
             Assets.icons.menu.image().image,
             size: 26,
+            color: Colors.black,
           ),
           Assets.images.logo.image(height: size.height / 13.6),
-          ImageIcon(Assets.icons.search.image().image, size: 30)
+          ImageIcon(
+            Assets.icons.search.image().image,
+            size: 30,
+            color: Colors.black,
+          )
         ],
       ),
     );
@@ -255,7 +362,7 @@ class TagList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 55,
+      height: 70,
       child: ListView.builder(
           itemCount: tagList.length,
           scrollDirection: Axis.horizontal,
@@ -268,7 +375,7 @@ class TagList extends StatelessWidget {
 
   Widget tagItem(int index, HashTagModel tag) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(8, 8, index == 0 ? bodyMargin : 8, 8),
+      padding: EdgeInsets.fromLTRB(8, 17, index == 0 ? bodyMargin : 8, 17),
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -276,7 +383,7 @@ class TagList extends StatelessWidget {
                 colors: GradiantColors.tags,
                 begin: Alignment.centerRight,
                 end: Alignment.centerLeft),
-            borderRadius: BorderRadius.circular(16)),
+            borderRadius: BorderRadius.circular(18)),
         height: 55,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(24, 8, 16, 8),

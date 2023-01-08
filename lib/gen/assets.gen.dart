@@ -21,11 +21,15 @@ class $AssetsIconsGen {
   /// File path: assets/icons/menu.png
   AssetGenImage get menu => const AssetGenImage('assets/icons/menu.png');
 
+  /// File path: assets/icons/microphon.png
+  AssetGenImage get microphon =>
+      const AssetGenImage('assets/icons/microphon.png');
+
   /// File path: assets/icons/search.png
   AssetGenImage get search => const AssetGenImage('assets/icons/search.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [bluePen, hashtag, menu, search];
+  List<AssetGenImage> get values => [bluePen, hashtag, menu, microphon, search];
 }
 
 class $AssetsImagesGen {
