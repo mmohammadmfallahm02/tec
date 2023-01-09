@@ -24,9 +24,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/menu.png
   AssetGenImage get menu => const AssetGenImage('assets/icons/menu.png');
 
-  /// File path: assets/icons/microphon.png
-  AssetGenImage get microphon =>
-      const AssetGenImage('assets/icons/microphon.png');
+  /// File path: assets/icons/microphone.png
+  AssetGenImage get microphone =>
+      const AssetGenImage('assets/icons/microphone.png');
 
   /// File path: assets/icons/search.png
   AssetGenImage get search => const AssetGenImage('assets/icons/search.png');
@@ -39,7 +39,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [bluePen, hashtag, home, menu, microphon, search, user, write];
+      [bluePen, hashtag, home, menu, microphone, search, user, write];
 }
 
 class $AssetsImagesGen {
