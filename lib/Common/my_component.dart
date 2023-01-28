@@ -12,7 +12,7 @@ class TechDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Divider(
-      height: 30,
+      height: 1,
       thickness: 1,
       color: SolidColors.dividerColor,
       indent: size.width / 6,

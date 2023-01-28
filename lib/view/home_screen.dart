@@ -72,8 +72,8 @@ class HomePagePodcastList extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return Padding(
-              padding: EdgeInsets.fromLTRB(
-                  4, 8, index == 0 ? bodyMargin : 16, 8),
+              padding:
+                  EdgeInsets.fromLTRB(4, 8, index == 0 ? bodyMargin : 16, 8),
               child: Column(
                 children: [
                   Container(
@@ -118,8 +118,8 @@ class HomePageBlogList extends StatelessWidget {
             final blog = blogList[index];
             // blog item
             return Padding(
-              padding: EdgeInsets.fromLTRB(
-                  4, 8, index == 0 ? bodyMargin : 16, 8),
+              padding:
+                  EdgeInsets.fromLTRB(4, 8, index == 0 ? bodyMargin : 16, 8),
               child: Column(
                 children: [
                   // blog post image
@@ -149,16 +149,14 @@ class HomePageBlogList extends StatelessWidget {
                             left: 0,
                             right: 0,
                             child: Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(blog.writer,
                                     style: themeData.textTheme.subtitle1),
                                 Row(
                                   children: [
                                     Text(blog.views,
-                                        style: themeData
-                                            .textTheme.subtitle1),
+                                        style: themeData.textTheme.subtitle1),
                                     const SizedBox(
                                       width: 8,
                                     ),
@@ -178,14 +176,16 @@ class HomePageBlogList extends StatelessWidget {
                     height: 4,
                   ),
                   // blog post text
-                  SizedBox(
-                      width: size.width / 2.6,
-                      child: Text(
-                        blog.title,
-                        maxLines: 2,
-                        // textAlign: TextAlign.justify,
-                        overflow: TextOverflow.ellipsis,
-                      ))
+                  Expanded(
+                    child: SizedBox(
+                        width: size.width / 2.6,
+                        child: Text(
+                          blog.title,
+                          maxLines: 2,
+                          // textAlign: TextAlign.justify,
+                          overflow: TextOverflow.ellipsis,
+                        )),
+                  )
                 ],
               ),
             );

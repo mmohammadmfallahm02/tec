@@ -56,8 +56,11 @@ class $AssetsImagesGen {
   AssetGenImage get profileAvatar =>
       const AssetGenImage('assets/images/profileAvatar.png');
 
+  /// File path: assets/images/tcbot.svg
+  String get tcbot => 'assets/images/tcbot.svg';
+
   /// List of all assets
-  List<AssetGenImage> get values => [logo, posterTest, profileAvatar];
+  List<dynamic> get values => [logo, posterTest, profileAvatar, tcbot];
 }
 
 class Assets {
