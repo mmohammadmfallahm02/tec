@@ -12,4 +12,5 @@ class MyStrings {
 
 برای ارسال مطلب و پادکست باید حتما 
 ثبت نام کنی""";
+  static const String insertYourEmail = "لطفا ایمیلت رو وارد کن";
 }

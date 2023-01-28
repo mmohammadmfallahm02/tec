@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tec/constants/my_color.dart';
-import 'package:tec/view/main_screen.dart';
-
+import 'package:tec/view/register_intro.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -19,6 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final ThemeData themeData = Theme.of(context);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [
@@ -31,6 +31,47 @@ class MyApp extends StatelessWidget {
         ],
         title: 'Flutter Demo',
         theme: ThemeData(
+            inputDecorationTheme: InputDecorationTheme(
+                hintStyle: const TextStyle(
+                  color: SolidColors.hintColor,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'dana',
+                  fontSize: 14,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(width: 2),
+                ),
+                filled: true,
+                fillColor: Colors.white),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                textStyle: MaterialStateProperty.resolveWith((states) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return const TextStyle(
+                      fontFamily: 'dana',
+                      fontSize: 18,
+                      color: SolidColors.posterTitle,
+                      fontWeight: FontWeight.w700,
+                    );
+                  }
+                  return const TextStyle(
+                    fontFamily: 'dana',
+                    fontSize: 14,
+                    color: SolidColors.posterSubTitle,
+                    fontWeight: FontWeight.w700,
+                  );
+                }),
+                backgroundColor: MaterialStateProperty.resolveWith(
+                  (states) {
+                    if (states.contains(MaterialState.pressed)) {
+                      return SolidColors.seeMore;
+                    }
+                    return SolidColors.primaryColor;
+                  },
+                ),
+              ),
+            ),
             primarySwatch: Colors.blue,
             fontFamily: 'dana',
             brightness: Brightness.light,
@@ -68,6 +109,6 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w700),
             )),
         // home: const SplashScreen());
-        home: const MainScreen());
+        home: const RegisterIntro());
   }
 }
