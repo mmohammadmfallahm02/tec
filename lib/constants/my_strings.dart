@@ -12,5 +12,10 @@ class MyStrings {
 
 برای ارسال مطلب و پادکست باید حتما 
 ثبت نام کنی""";
+  static const String successfulRegistration =
+      """تبریک میگم ، ایمیل با موفقیت تایید شد
+لطفا اطلاعات ثبت نام رو کامل کن""";
   static const String insertYourEmail = "لطفا ایمیلت رو وارد کن";
+  static const String insertActivateCode = "کد فعال سازی رو وارد کن";
+  static const String chooseCategory = "دسته بندی هایی که دوست داری رو انتخاب کن";
 }
