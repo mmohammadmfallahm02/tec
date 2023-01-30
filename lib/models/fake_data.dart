@@ -22,6 +22,10 @@ List<HashTagModel> tagList = [
   HashTagModel(title: 'فلاتر')
 ];
 
+// tags selected data
+
+List<HashTagModel> selectedTagList = [];
+
 // blogs fake data
 List<BlogModel> blogList = [
   BlogModel(

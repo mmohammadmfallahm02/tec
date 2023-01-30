@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tec/Common/my_component.dart';
 import 'package:tec/constants/my_color.dart';
 import 'package:tec/constants/my_strings.dart';
 import 'package:tec/gen/assets.gen.dart';
@@ -250,34 +251,10 @@ class HomePageTagList extends StatelessWidget {
             return Padding(
               padding:
                   EdgeInsets.fromLTRB(8, 17, index == 0 ? bodyMargin : 8, 17),
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                        colors: GradiantColors.tags,
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft),
-                    borderRadius: BorderRadius.circular(18)),
-                height: 55,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 8, 16, 8),
-                  child: Row(
-                    children: [
-                      ImageIcon(
-                        Assets.icons.hashtag.image().image,
-                        color: Colors.white,
-                        size: 16,
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        tag.title,
-                        style: themeData.textTheme.headline2,
-                      ),
-                    ],
-                  ),
-                ),
+              child: MainTags(
+                tag: tag,
+                themeData: themeData,
+                isCategoryList: false,
               ),
             );
           }),

@@ -20,7 +20,7 @@ class RegisterIntro extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                Assets.images.tcbot,
+                Assets.images.tcbot.path,
                 height: 100,
               ),
               const SizedBox(

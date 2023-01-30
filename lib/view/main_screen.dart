@@ -11,6 +11,8 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
+final GlobalKey<ScaffoldState> _key = GlobalKey();
+
 class _MainScreenState extends State<MainScreen> {
   int selectedPageIndex = 0;
   @override
@@ -20,7 +22,58 @@ class _MainScreenState extends State<MainScreen> {
     final ThemeData themeData = Theme.of(context);
     return SafeArea(
         child: Scaffold(
+      key: _key,
+      drawer: Drawer(
+        backgroundColor: SolidColors.scaffoldBg,
+        child: ListView(
+            padding: EdgeInsets.only(left: bodyMargin, right: bodyMargin),
+            children: [
+              DrawerHeader(
+                  child: Center(
+                child: Assets.images.logo.image(scale: 3),
+              )),
+              const Divider(
+                color: SolidColors.dividerColor,
+                height: 10,
+                thickness: 1,
+              ),
+              ListTile(
+                title: Text(
+                  'پروفایل کاربری',
+                  style: themeData.textTheme.headline4,
+                ),
+              ),
+              const Divider(
+                color: SolidColors.dividerColor,
+                height: 10,
+                thickness: 1,
+              ),
+              ListTile(
+                title: Text('درباره تک‌بلاگ',
+                    style: themeData.textTheme.headline4),
+              ),
+              const Divider(
+                color: SolidColors.dividerColor,
+                height: 10,
+                thickness: 1,
+              ),
+              ListTile(
+                title: Text('اشتراک گذاری تک بلاگ',
+                    style: themeData.textTheme.headline4),
+              ),
+              const Divider(
+                color: SolidColors.dividerColor,
+                height: 10,
+                thickness: 1,
+              ),
+              ListTile(
+                title: Text('تک‌بلاگ در گیت هاب',
+                    style: themeData.textTheme.headline4),
+              ),
+            ]),
+      ),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: SolidColors.scaffoldBg,
         elevation: 0,
         title: _appBar(bodyMargin, size),
@@ -32,10 +85,10 @@ class _MainScreenState extends State<MainScreen> {
             index: selectedPageIndex,
             children: [
               HomeScreen(
-              size: size, themeData: themeData, bodyMargin: bodyMargin),
+                  size: size, themeData: themeData, bodyMargin: bodyMargin),
               const Text('second screen1'),
               ProfileScreen(
-              size: size, themeData: themeData, bodyMargin: bodyMargin),
+                  size: size, themeData: themeData, bodyMargin: bodyMargin),
             ],
           )),
           BottomNavigation(
@@ -58,10 +111,15 @@ class _MainScreenState extends State<MainScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ImageIcon(
-            Assets.icons.menu.image().image,
-            size: 26,
-            color: Colors.black,
+          InkWell(
+            onTap: () {
+              _key.currentState!.openDrawer();
+            },
+            child: ImageIcon(
+              Assets.icons.menu.image().image,
+              size: 26,
+              color: Colors.black,
+            ),
           ),
           Assets.images.logo.image(height: size.height / 13.6),
           ImageIcon(
