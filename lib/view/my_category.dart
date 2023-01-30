@@ -75,7 +75,9 @@ class _MyCategoryState extends State<MyCategory> {
                     itemBuilder: (context, index) => InkWell(
                           onTap: () {
                             setState(() {
-                              selectedTagList.add(tagList[index]);
+                              !selectedTagList.contains(tagList[index])
+                                  ? selectedTagList.add(tagList[index])
+                                  : true;
                             });
                           },
                           child: MainTags(
