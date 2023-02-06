@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tec/constants/my_color.dart';
+import 'package:tec/component/my_color.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/models/data_models.dart';
 
