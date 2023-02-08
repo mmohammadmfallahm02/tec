@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tec/component/my_component.dart';
 import 'package:tec/component/my_color.dart';
 import 'package:tec/component/my_strings.dart';
+import 'package:tec/controller/home_screen_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/models/fake_data.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({
+  HomeScreen({
     Key? key,
     required this.size,
     required this.themeData,
     required this.bodyMargin,
   }) : super(key: key);
 
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
   final Size size;
   final ThemeData themeData;
   final double bodyMargin;
@@ -37,8 +40,7 @@ class HomeScreen extends StatelessWidget {
             text: MyStrings.viewHotestBlog,
             icon: Assets.icons.bluePen.image(),
           ),
-          HomePageBlogList(
-              size: size, bodyMargin: bodyMargin, themeData: themeData),
+          topVisited(),
           SeeMore(
               bodyMargin: bodyMargin,
               themeData: themeData,
@@ -49,6 +51,95 @@ class HomeScreen extends StatelessWidget {
             height: 60,
           )
         ],
+      ),
+    );
+  }
+
+  Widget topVisited() {
+    return SizedBox(
+      height: size.height / 4.1,
+      child: Obx(
+        () => ListView.builder(
+            itemCount: homeScreenController.topVisitedList.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              final blog = homeScreenController.topVisitedList[index];
+              // blog item
+              return Padding(
+                padding:
+                    EdgeInsets.fromLTRB(4, 8, index == 0 ? bodyMargin : 16, 8),
+                child: Column(
+                  children: [
+                    // blog post image
+                    SizedBox(
+                      height: size.height / 5.9,
+                      width: size.width / 2.6,
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                    blog.image!,
+                                  ),
+                                  fit: BoxFit.cover),
+                            ),
+                            foregroundDecoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                    colors: GradiantColors.blogPostGradint,
+                                    begin: Alignment.bottomCenter,
+                                    end: Alignment.topCenter),
+                                borderRadius: BorderRadius.circular(16)),
+                          ),
+                          Positioned(
+                              bottom: 8,
+                              left: 0,
+                              right: 0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(blog.author!,
+                                      style: themeData.textTheme.subtitle1),
+                                  Row(
+                                    children: [
+                                      Text(blog.view!,
+                                          style: themeData.textTheme.subtitle1),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      const Icon(
+                                        Icons.remove_red_eye_sharp,
+                                        color: Colors.white,
+                                        size: 16,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ))
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    // blog post text
+                    Expanded(
+                      child: SizedBox(
+                          width: size.width / 2.6,
+                          child: Text(
+                            blog.title!,
+                            maxLines: 2,
+                            softWrap: true,
+                            // textAlign: TextAlign.justify,
+                            overflow: TextOverflow.ellipsis,
+                          )),
+                    )
+                  ],
+                ),
+              );
+            }),
       ),
     );
   }
@@ -88,105 +179,6 @@ class HomePagePodcastList extends StatelessWidget {
                     height: 8,
                   ),
                   Text('podcast $index')
-                ],
-              ),
-            );
-          }),
-    );
-  }
-}
-
-class HomePageBlogList extends StatelessWidget {
-  const HomePageBlogList({
-    Key? key,
-    required this.size,
-    required this.bodyMargin,
-    required this.themeData,
-  }) : super(key: key);
-
-  final Size size;
-  final double bodyMargin;
-  final ThemeData themeData;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: size.height / 4.1,
-      child: ListView.builder(
-          itemCount: blogList.getRange(0, 5).length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            final blog = blogList[index];
-            // blog item
-            return Padding(
-              padding:
-                  EdgeInsets.fromLTRB(4, 8, index == 0 ? bodyMargin : 16, 8),
-              child: Column(
-                children: [
-                  // blog post image
-                  SizedBox(
-                    height: size.height / 5.9,
-                    width: size.width / 2.6,
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                  blog.imageUrl,
-                                ),
-                                fit: BoxFit.cover),
-                          ),
-                          foregroundDecoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                  colors: GradiantColors.blogPostGradint,
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter),
-                              borderRadius: BorderRadius.circular(16)),
-                        ),
-                        Positioned(
-                            bottom: 8,
-                            left: 0,
-                            right: 0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(blog.writer,
-                                    style: themeData.textTheme.subtitle1),
-                                Row(
-                                  children: [
-                                    Text(blog.views,
-                                        style: themeData.textTheme.subtitle1),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    const Icon(
-                                      Icons.remove_red_eye_sharp,
-                                      color: Colors.white,
-                                      size: 16,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ))
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  // blog post text
-                  Expanded(
-                    child: SizedBox(
-                        width: size.width / 2.6,
-                        child: Text(
-                          blog.title,
-                          maxLines: 2,
-                          // textAlign: TextAlign.justify,
-                          overflow: TextOverflow.ellipsis,
-                        )),
-                  )
                 ],
               ),
             );

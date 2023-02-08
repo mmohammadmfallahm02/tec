@@ -17,7 +17,6 @@ class MainScreen extends StatelessWidget {
   MainScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    DioService().getMethod(ApiConstant.getHomeItem);
     var size = MediaQuery.of(context).size;
     final double bodyMargin = size.width / 16;
     final ThemeData themeData = Theme.of(context);

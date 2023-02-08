@@ -1,10 +1,10 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
-import 'package:tec/component/api_constant.dart';
+
 
 class DioService {
   Future<dynamic> getMethod(String url) async {
-    Dio dio = Dio(BaseOptions(baseUrl: ApiConstant.baseUrl));
+    Dio dio = Dio();
     dio.options.headers['content_type'] = 'application/json';
     return await dio
         .get(url,
