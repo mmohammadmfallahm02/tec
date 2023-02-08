@@ -43,6 +43,8 @@ dependencies:
   flutter_svg: ^1.1.6
   validators: ^3.0.0
   get: ^4.6.5
+  url_launcher: ^6.1.9
+  share_plus: ^6.3.0
 
 dev_dependencies:
   flutter_test:

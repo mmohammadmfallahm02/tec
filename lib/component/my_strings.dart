@@ -1,5 +1,6 @@
 class MyStrings {
   static const String viewHotestBlog = "مشاهده داغ ترین نوشته ها ";
+  static const String techBlogGithubUrl = "https://github.com/sasansafari/techblog";
   static const String viewHotestPodCasts = "مشاهده داغ ترین پادکست ها";
   static const String relatedArticle = "نوشته های مرتبط";
   static const String submitArticle = "ارسال مقاله";
@@ -12,10 +13,15 @@ class MyStrings {
 
 برای ارسال مطلب و پادکست باید حتما 
 ثبت نام کنی""";
+  static const String shareText =
+      """من از تکبلاگ استفاده می کنم، خیلی باحاله، تو هم داشته باش.\n
+
+www.sasansafari.com""";
   static const String successfulRegistration =
       """تبریک میگم ، ایمیل با موفقیت تایید شد
 لطفا اطلاعات ثبت نام رو کامل کن""";
   static const String insertYourEmail = "لطفا ایمیلت رو وارد کن";
   static const String insertActivateCode = "کد فعال سازی رو وارد کن";
-  static const String chooseCategory = "دسته بندی هایی که دوست داری رو انتخاب کن";
+  static const String chooseCategory =
+      "دسته بندی هایی که دوست داری رو انتخاب کن";
 }

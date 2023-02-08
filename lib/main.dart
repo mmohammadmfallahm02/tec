@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tec/component/my_color.dart';
-import 'package:tec/view/register_intro.dart';
+import 'package:tec/view/main_screen.dart';
 
 
 void main() {
@@ -110,6 +110,6 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w700),
             )),
         // home: const SplashScreen());
-        home: const RegisterIntro());
+        home:  MainScreen());
   }
 }

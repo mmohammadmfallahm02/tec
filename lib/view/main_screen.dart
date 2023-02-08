@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tec/component/my_color.dart';
+import 'package:tec/component/my_component.dart';
+import 'package:tec/component/my_strings.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/view/home_screen.dart';
 import 'package:tec/view/profile_screen.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-class _MainScreenState extends State<MainScreen> {
-  int selectedPageIndex = 0;
+class MainScreen extends StatelessWidget {
+  RxInt selectedPageIndex = 0.obs;
+  MainScreen({super.key});
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -58,6 +56,9 @@ class _MainScreenState extends State<MainScreen> {
                 thickness: 1,
               ),
               ListTile(
+                onTap: () async {
+                  await Share.share(MyStrings.shareText);
+                },
                 title: Text('اشتراک گذاری تک بلاگ',
                     style: themeData.textTheme.headline4),
               ),
@@ -67,6 +68,9 @@ class _MainScreenState extends State<MainScreen> {
                 thickness: 1,
               ),
               ListTile(
+                onTap: () {
+                  myLaunchUrl(MyStrings.techBlogGithubUrl);
+                },
                 title: Text('تک‌بلاگ در گیت هاب',
                     style: themeData.textTheme.headline4),
               ),
@@ -80,24 +84,25 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: Stack(
         children: [
-          Positioned.fill(
-              child: IndexedStack(
-            index: selectedPageIndex,
-            children: [
-              HomeScreen(
-                  size: size, themeData: themeData, bodyMargin: bodyMargin),
-              const Text('second screen1'),
-              ProfileScreen(
-                  size: size, themeData: themeData, bodyMargin: bodyMargin),
-            ],
+          Positioned.fill(child: Obx(
+            () {
+              return IndexedStack(
+                index: selectedPageIndex.value,
+                children: [
+                  HomeScreen(
+                      size: size, themeData: themeData, bodyMargin: bodyMargin),
+                  const Text('second screen1'),
+                  ProfileScreen(
+                      size: size, themeData: themeData, bodyMargin: bodyMargin),
+                ],
+              );
+            },
           )),
           BottomNavigation(
             size: size,
             bodyMargin: bodyMargin,
             changeScreen: (int currentPageIndex) {
-              setState(() {
-                selectedPageIndex = currentPageIndex;
-              });
+              selectedPageIndex.value = currentPageIndex;
             },
           )
         ],
