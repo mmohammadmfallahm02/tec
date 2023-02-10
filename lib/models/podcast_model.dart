@@ -1,3 +1,5 @@
+import 'package:tec/component/api_constant.dart';
+
 class PodcastModel {
   String? id;
   String? title;
@@ -22,7 +24,7 @@ class PodcastModel {
   PodcastModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         title = json['title'],
-        poster = json['poster'],
+        poster = ApiConstant.hostDlUrl + json['poster'],
         catName = json['cat_name'],
         author = json['author'],
         view = json['view'],

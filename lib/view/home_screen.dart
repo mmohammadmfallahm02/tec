@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tec/component/my_component.dart';
@@ -40,13 +42,13 @@ class HomeScreen extends StatelessWidget {
             text: MyStrings.viewHotestBlog,
             icon: Assets.icons.bluePen.image(),
           ),
-          topVisited(),
+          topVisitedList(),
           SeeMore(
               bodyMargin: bodyMargin,
               themeData: themeData,
               text: MyStrings.viewHotestPodCasts,
               icon: Assets.icons.microphone.image()),
-          HomePagePodcastList(size: size, bodyMargin: bodyMargin),
+          topPodcastList(),
           const SizedBox(
             height: 60,
           )
@@ -55,7 +57,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget topVisited() {
+  Widget topVisitedList() {
     return SizedBox(
       height: size.height / 4.1,
       child: Obx(
@@ -63,7 +65,7 @@ class HomeScreen extends StatelessWidget {
             itemCount: homeScreenController.topVisitedList.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              final blog = homeScreenController.topVisitedList[index];
+              final article = homeScreenController.topVisitedList[index];
               // blog item
               return Padding(
                 padding:
@@ -81,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(16),
                               image: DecorationImage(
                                   image: NetworkImage(
-                                    blog.image!,
+                                    article.image!,
                                   ),
                                   fit: BoxFit.cover),
                             ),
@@ -100,11 +102,11 @@ class HomeScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  Text(blog.author!,
+                                  Text(article.author!,
                                       style: themeData.textTheme.subtitle1),
                                   Row(
                                     children: [
-                                      Text(blog.view!,
+                                      Text(article.view!,
                                           style: themeData.textTheme.subtitle1),
                                       const SizedBox(
                                         width: 8,
@@ -129,7 +131,7 @@ class HomeScreen extends StatelessWidget {
                       child: SizedBox(
                           width: size.width / 2.6,
                           child: Text(
-                            blog.title!,
+                            article.title!,
                             maxLines: 2,
                             softWrap: true,
                             // textAlign: TextAlign.justify,
@@ -143,46 +145,38 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class HomePagePodcastList extends StatelessWidget {
-  const HomePagePodcastList({
-    Key? key,
-    required this.size,
-    required this.bodyMargin,
-  }) : super(key: key);
-
-  final Size size;
-  final double bodyMargin;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget topPodcastList() {
     return SizedBox(
       height: size.height / 4.5,
-      child: ListView.builder(
-          itemCount: 10,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding:
-                  EdgeInsets.fromLTRB(4, 8, index == 0 ? bodyMargin : 16, 8),
-              child: Column(
-                children: [
-                  Container(
-                    height: size.height / 6.5,
-                    width: size.width / 3.2,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(18)),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text('podcast $index')
-                ],
-              ),
-            );
-          }),
+      child: Obx(
+        () => ListView.builder(
+            itemCount: homeScreenController.topPodcasts.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              final podcast = homeScreenController.topPodcasts[index];
+              return Padding(
+                padding:
+                    EdgeInsets.fromLTRB(4, 8, index == 0 ? bodyMargin : 16, 8),
+                child: Column(
+                  children: [
+                    Container(
+                      height: size.height / 6.5,
+                      width: size.width / 3.2,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18),
+                          image: DecorationImage(
+                              image: NetworkImage(podcast.poster!))),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(podcast.title!)
+                  ],
+                ),
+              );
+            }),
+      ),
     );
   }
 }
