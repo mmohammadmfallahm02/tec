@@ -1,6 +1,6 @@
-import 'dart:ui';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:tec/component/my_component.dart';
 import 'package:tec/component/my_color.dart';
@@ -24,35 +24,39 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 26,
-          ),
-          HomePagePoster(size: size, themeData: themeData),
-          const SizedBox(
-            height: 32,
-          ),
-          HomePageTagList(bodyMargin: bodyMargin, themeData: themeData),
-          // see more
-          SeeMore(
-            bodyMargin: bodyMargin,
-            themeData: themeData,
-            text: MyStrings.viewHotestBlog,
-            icon: Assets.icons.bluePen.image(),
-          ),
-          topVisitedList(),
-          SeeMore(
-              bodyMargin: bodyMargin,
-              themeData: themeData,
-              text: MyStrings.viewHotestPodCasts,
-              icon: Assets.icons.microphone.image()),
-          topPodcastList(),
-          const SizedBox(
-            height: 60,
-          )
-        ],
+    return Obx(
+      () => SingleChildScrollView(
+        child: homeScreenController.loading.value == false
+            ? Column(
+                children: [
+                  const SizedBox(
+                    height: 26,
+                  ),
+                  homePagePoster(),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  HomePageTagList(bodyMargin: bodyMargin, themeData: themeData),
+                  // see more
+                  SeeMore(
+                    bodyMargin: bodyMargin,
+                    themeData: themeData,
+                    text: MyStrings.viewHotestBlog,
+                    icon: Assets.icons.bluePen.image(),
+                  ),
+                  topVisitedList(),
+                  SeeMore(
+                      bodyMargin: bodyMargin,
+                      themeData: themeData,
+                      text: MyStrings.viewHotestPodCasts,
+                      icon: Assets.icons.microphone.image()),
+                  topPodcastList(),
+                  const SizedBox(
+                    height: 60,
+                  )
+                ],
+              )
+            : const Loading(),
       ),
     );
   }
@@ -78,22 +82,27 @@ class HomeScreen extends StatelessWidget {
                       width: size.width / 2.6,
                       child: Stack(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                    article.image!,
+                          CachedNetworkImage(
+                              imageUrl: article.image!,
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(16),
+                                        image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover)),
+                                    foregroundDecoration: BoxDecoration(
+                                        gradient: const LinearGradient(
+                                            colors:
+                                                GradiantColors.blogPostGradint,
+                                            begin: Alignment.bottomCenter,
+                                            end: Alignment.topCenter),
+                                        borderRadius:
+                                            BorderRadius.circular(16)),
                                   ),
-                                  fit: BoxFit.cover),
-                            ),
-                            foregroundDecoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                    colors: GradiantColors.blogPostGradint,
-                                    begin: Alignment.bottomCenter,
-                                    end: Alignment.topCenter),
-                                borderRadius: BorderRadius.circular(16)),
-                          ),
+                              placeholder: (context, url) => const Loading(),
+                              errorWidget: (context, url, error) =>
+                                  myErrorImageWidget()),
                           Positioned(
                               bottom: 8,
                               left: 0,
@@ -135,7 +144,7 @@ class HomeScreen extends StatelessWidget {
                             maxLines: 2,
                             softWrap: true,
                             // textAlign: TextAlign.justify,
-                            overflow: TextOverflow.ellipsis,
+                            overflow: TextOverflow.fade,
                           )),
                     )
                   ],
@@ -160,13 +169,21 @@ class HomeScreen extends StatelessWidget {
                     EdgeInsets.fromLTRB(4, 8, index == 0 ? bodyMargin : 16, 8),
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: size.height / 6.5,
                       width: size.width / 3.2,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(18),
-                          image: DecorationImage(
-                              image: NetworkImage(podcast.poster!))),
+                      child: CachedNetworkImage(
+                        imageUrl: podcast.poster!,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              image: DecorationImage(
+                                  image: imageProvider, fit: BoxFit.cover)),
+                        ),
+                        placeholder: (context, url) => const Loading(),
+                        errorWidget: (context, url, error) =>
+                            myErrorImageWidget(),
+                      ),
                     ),
                     const SizedBox(
                       height: 8,
@@ -177,6 +194,85 @@ class HomeScreen extends StatelessWidget {
               );
             }),
       ),
+    );
+  }
+
+  Widget myErrorImageWidget() {
+    return const Center(
+      child: Icon(
+        Icons.image_not_supported_outlined,
+        size: 45,
+        color: Colors.grey,
+      ),
+    );
+  }
+
+  Widget homePagePoster() {
+    return Stack(
+      children: [
+        SizedBox(
+          width: size.width / 1.14,
+          height: size.height / 4.3,
+          child: CachedNetworkImage(
+            imageUrl: homeScreenController.poster.value.image!,
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                image: DecorationImage(fit: BoxFit.cover, image: imageProvider),
+              ),
+              foregroundDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                gradient: const LinearGradient(
+                  colors: GradiantColors.homePosterCoverGradiant,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+            left: 24,
+            right: 24,
+            bottom: 16,
+            child: Column(
+              children: [
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "${homePagePosterMap["writer"]}  -  ${homePagePosterMap["date"]}",
+                        style: themeData.textTheme.subtitle1,
+                      ),
+                      Row(
+                        children: [
+                          Text(homePagePosterMap["view"],
+                              style: themeData.textTheme.subtitle1),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          const Icon(
+                            Icons.remove_red_eye_sharp,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                        ],
+                      )
+                    ]),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  homeScreenController.poster.value.title!,
+                  overflow: TextOverflow.fade,
+                  softWrap: false,
+                  textAlign: TextAlign.center,
+                  style: themeData.textTheme.headline1,
+                )
+              ],
+            ))
+      ],
     );
   }
 }
@@ -244,84 +340,6 @@ class HomePageTagList extends StatelessWidget {
               ),
             );
           }),
-    );
-  }
-}
-
-class HomePagePoster extends StatelessWidget {
-  const HomePagePoster({
-    Key? key,
-    required this.size,
-    required this.themeData,
-  }) : super(key: key);
-
-  final Size size;
-  final ThemeData themeData;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: size.width / 1.14,
-          height: size.height / 4.3,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(homePagePosterMap['ImageAssets'])),
-          ),
-          foregroundDecoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            gradient: const LinearGradient(
-              colors: GradiantColors.homePosterCoverGradiant,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-        ),
-        Positioned(
-            left: 24,
-            right: 24,
-            bottom: 16,
-            child: Column(
-              children: [
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "${homePagePosterMap["writer"]}  -  ${homePagePosterMap["date"]}",
-                        style: themeData.textTheme.subtitle1,
-                      ),
-                      Row(
-                        children: [
-                          Text(homePagePosterMap["view"],
-                              style: themeData.textTheme.subtitle1),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          const Icon(
-                            Icons.remove_red_eye_sharp,
-                            color: Colors.white,
-                            size: 16,
-                          ),
-                        ],
-                      )
-                    ]),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  homePagePosterMap["title"],
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: false,
-                  textAlign: TextAlign.center,
-                  style: themeData.textTheme.headline1,
-                )
-              ],
-            ))
-      ],
     );
   }
 }
