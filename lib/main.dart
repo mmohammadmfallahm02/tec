@@ -111,6 +111,6 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w700),
             )),
         // home: const SplashScreen());
-        home:  const ArticleListScreen());
+        home:   ArticleListScreen());
   }
 }

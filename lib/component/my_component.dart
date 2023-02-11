@@ -105,7 +105,7 @@ class Loading extends StatelessWidget {
 
 PreferredSize appbar(String title) {
   return PreferredSize(
-    preferredSize: const Size.fromHeight(70),
+    preferredSize: const Size.fromHeight(60),
     child: Padding(
       padding: const EdgeInsets.only(right: 16, left: 16),
       child: AppBar(
