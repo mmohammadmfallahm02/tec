@@ -24,38 +24,39 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SingleChildScrollView(
-        child: homeScreenController.loading.value == false
-            ? Column(
-                children: [
-                  const SizedBox(
-                    height: 26,
-                  ),
-                  homePagePoster(),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  tagsList(),
-                  // see more
-                  SeeMore(
-                    bodyMargin: bodyMargin,
-                    themeData: themeData,
-                    text: MyStrings.viewHotestBlog,
-                    icon: Assets.icons.bluePen.image(),
-                  ),
-                  topVisitedList(),
-                  SeeMore(
-                      bodyMargin: bodyMargin,
-                      themeData: themeData,
-                      text: MyStrings.viewHotestPodCasts,
-                      icon: Assets.icons.microphone.image()),
-                  topPodcastList(),
-                  const SizedBox(
-                    height: 60,
+      () => Center(
+        child: SingleChildScrollView(
+            child: homeScreenController.loading.value == false
+                ? Column(
+                    children: [
+                      const SizedBox(
+                        height: 26,
+                      ),
+                      homePagePoster(),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      tagsList(),
+                      // see more
+                      SeeMore(
+                        bodyMargin: bodyMargin,
+                        themeData: themeData,
+                        text: MyStrings.viewHotestBlog,
+                        icon: Assets.icons.bluePen.image(),
+                      ),
+                      topVisitedList(),
+                      SeeMore(
+                          bodyMargin: bodyMargin,
+                          themeData: themeData,
+                          text: MyStrings.viewHotestPodCasts,
+                          icon: Assets.icons.microphone.image()),
+                      topPodcastList(),
+                      const SizedBox(
+                        height: 60,
+                      )
+                    ],
                   )
-                ],
-              )
-            : const Loading(),
+                : const Loading()),
       ),
     );
   }

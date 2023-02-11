@@ -5,8 +5,8 @@ import 'package:tec/component/my_color.dart';
 import 'package:tec/component/my_component.dart';
 import 'package:tec/component/my_strings.dart';
 import 'package:tec/gen/assets.gen.dart';
-import 'package:tec/view/home_screen.dart';
-import 'package:tec/view/profile_screen.dart';
+import 'package:tec/view/main_screen/home_screen.dart';
+import 'package:tec/view/main_screen/profile_screen.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tec/component/my_color.dart';
+import 'package:tec/component/text_style.dart';
 import 'package:tec/controller/home_screen_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -100,4 +101,36 @@ class Loading extends StatelessWidget {
       size: 32,
     );
   }
+}
+
+PreferredSize appbar(String title) {
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(70),
+    child: Padding(
+      padding: const EdgeInsets.only(right: 16, left: 16),
+      child: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          Center(
+            child: Text(
+              title,
+              style: appbarTextStyle,
+            ),
+          )
+        ],
+        leading: Container(
+          width: 50,
+          height: 50,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: SolidColors.primaryColor.withAlpha(100)),
+          child: const Icon(
+            Icons.keyboard_arrow_right,
+            size: 40,
+          ),
+        ),
+      ),
+    ),
+  );
 }
