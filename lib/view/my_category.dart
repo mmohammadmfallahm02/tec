@@ -82,7 +82,7 @@ class _MyCategoryState extends State<MyCategory> {
                           },
                           child: MainTags(
                             themeData: themeData,
-                            tag: tagList[index],
+                            index: index,
                             isCategoryList: true,
                           ),
                         ))),

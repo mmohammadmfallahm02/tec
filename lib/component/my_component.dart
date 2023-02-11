@@ -1,9 +1,10 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:tec/component/my_color.dart';
+import 'package:tec/controller/home_screen_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
-import 'package:tec/models/data_models.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TechDivider extends StatelessWidget {
@@ -29,12 +30,12 @@ class TechDivider extends StatelessWidget {
 class MainTags extends StatelessWidget {
   const MainTags({
     Key? key,
-    required this.tag,
+    required this.index,
     required this.themeData,
     required this.isCategoryList,
   }) : super(key: key);
 
-  final HashTagModel tag;
+  final int index;
   final ThemeData themeData;
   final bool isCategoryList;
 
@@ -68,7 +69,7 @@ class MainTags extends StatelessWidget {
                     width: 16,
                   ),
             Text(
-              tag.title,
+              Get.find<HomeScreenController>().tagsList[index].title!,
               style: themeData.textTheme.headline2,
             ),
           ],

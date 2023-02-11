@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 import 'package:dio/dio.dart';
 
 
@@ -13,7 +13,7 @@ class DioService {
               method: 'GET',
             ))
         .then((response) {
-      log(response.toString());
+      // log(response.toString());
       return response;
     });
   }

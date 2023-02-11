@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:tec/component/my_component.dart';
 import 'package:tec/component/my_color.dart';
@@ -36,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 32,
                   ),
-                  HomePageTagList(bodyMargin: bodyMargin, themeData: themeData),
+                  tagsList(),
                   // see more
                   SeeMore(
                     bodyMargin: bodyMargin,
@@ -229,6 +228,8 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+            placeholder: (context, url) => const Loading(),
+            errorWidget: (context, url, error) => myErrorImageWidget(),
           ),
         ),
         Positioned(
@@ -247,8 +248,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Text(homePagePosterMap["view"],
-                              style: themeData.textTheme.subtitle1),
+                          Text('251', style: themeData.textTheme.subtitle1),
                           const SizedBox(
                             width: 8,
                           ),
@@ -266,13 +266,34 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   homeScreenController.poster.value.title!,
                   overflow: TextOverflow.fade,
-                  softWrap: false,
+                  softWrap: true,
                   textAlign: TextAlign.center,
+                  maxLines: 1,
                   style: themeData.textTheme.headline1,
                 )
               ],
             ))
       ],
+    );
+  }
+
+  Widget tagsList() {
+    return SizedBox(
+      height: 70,
+      child: ListView.builder(
+          itemCount: homeScreenController.tagsList.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding:
+                  EdgeInsets.fromLTRB(8, 17, index == 0 ? bodyMargin : 8, 17),
+              child: MainTags(
+                index: index,
+                themeData: themeData,
+                isCategoryList: false,
+              ),
+            );
+          }),
     );
   }
 }
@@ -307,39 +328,6 @@ class SeeMore extends StatelessWidget {
           Text(text, style: themeData.textTheme.headline3),
         ],
       ),
-    );
-  }
-}
-
-class HomePageTagList extends StatelessWidget {
-  const HomePageTagList({
-    Key? key,
-    required this.bodyMargin,
-    required this.themeData,
-  }) : super(key: key);
-
-  final double bodyMargin;
-  final ThemeData themeData;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 70,
-      child: ListView.builder(
-          itemCount: tagList.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            final tag = tagList[index];
-            return Padding(
-              padding:
-                  EdgeInsets.fromLTRB(8, 17, index == 0 ? bodyMargin : 8, 17),
-              child: MainTags(
-                tag: tag,
-                themeData: themeData,
-                isCategoryList: false,
-              ),
-            );
-          }),
     );
   }
 }
