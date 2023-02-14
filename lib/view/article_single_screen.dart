@@ -1,19 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:get/get.dart';
 import 'package:tec/component/my_color.dart';
 import 'package:tec/component/my_component.dart';
 import 'package:tec/gen/assets.gen.dart';
-import 'package:tec/models/article_model.dart';
 
 class ArticleSingleScreen extends StatelessWidget {
-  final ArticleModel article;
-  const ArticleSingleScreen({super.key, required this.article});
+  const ArticleSingleScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -166,25 +168,23 @@ class ArticleSingleScreen extends StatelessWidget {
               child:
                   Text('نوشته های مرتبط', style: themeData.textTheme.headline3),
             ),
-            topVisitedList(themeData,size)
+            topVisitedList(themeData, size)
           ]),
         ),
       ),
     );
   }
 
-  Widget topVisitedList(ThemeData themeData,Size size) {
+  Widget topVisitedList(ThemeData themeData, Size size) {
     return SizedBox(
       height: size.height / 4.1,
       child: ListView.builder(
           itemCount: 6,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-           
             // blog item
             return Padding(
-              padding:
-                  EdgeInsets.fromLTRB(4, 8, index == 0 ? 25 : 16, 8),
+              padding: EdgeInsets.fromLTRB(4, 8, index == 0 ? 25 : 16, 8),
               child: Column(
                 children: [
                   // blog post image
@@ -194,7 +194,8 @@ class ArticleSingleScreen extends StatelessWidget {
                     child: Stack(
                       children: [
                         CachedNetworkImage(
-                            imageUrl: 'https://api2.zoomit.ir/media/2020-10-samsung-release-update-for-galaxy-s20-fe-touchscreen-638bb228c669e381fe49646c?w=1920&q=75',
+                            imageUrl:
+                                'https://api2.zoomit.ir/media/2020-10-samsung-release-update-for-galaxy-s20-fe-touchscreen-638bb228c669e381fe49646c?w=1920&q=75',
                             imageBuilder: (context, imageProvider) => Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(16),

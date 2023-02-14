@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
 import 'package:tec/component/my_color.dart';
 import 'package:tec/view/article_list_screen.dart';
 
@@ -20,16 +21,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final ThemeData themeData = Theme.of(context);
-    return MaterialApp(
+    return GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('fa', ''), //farsi
-        ],
+        locale: const Locale('fa'),
         title: 'Flutter Demo',
         theme: ThemeData(
             inputDecorationTheme: InputDecorationTheme(

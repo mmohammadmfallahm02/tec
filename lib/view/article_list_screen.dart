@@ -2,12 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tec/component/my_component.dart';
-import 'package:tec/controller/article_controller.dart';
+import 'package:tec/controller/list_article_controller.dart';
+import 'package:tec/controller/single_article_controller.dart';
 import 'package:tec/view/article_single_screen.dart';
 
 class ArticleListScreen extends StatelessWidget {
   ArticleListScreen({super.key});
-  ArticleController articleController = Get.put(ArticleController());
+  ListArticleController listArticleController =
+      Get.put(ListArticleController());
+  SingleArticleController singleArticleController =
+      Get.put(SingleArticleController());
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
@@ -19,19 +23,20 @@ class ArticleListScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
             child: ListView.builder(
-                itemCount: articleController.articleList.length,
+                itemCount: listArticleController.articleList.length,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-                  final article = articleController.articleList[index];
+                  final article = listArticleController.articleList[index];
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(16),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ArticleSingleScreen(
-                                  article: article,
-                                )));
+                        singleArticleController.id.value =
+                            int.parse(article.id!);
+                        Get.to(
+                          const ArticleSingleScreen(),
+                        );
                       },
                       child: SizedBox(
                         height: 120,
