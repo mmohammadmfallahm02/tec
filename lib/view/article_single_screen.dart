@@ -4,18 +4,20 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:tec/component/my_color.dart';
 import 'package:tec/component/my_component.dart';
+import 'package:tec/controller/single_article_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
 
 class ArticleSingleScreen extends StatelessWidget {
-  const ArticleSingleScreen({
+  ArticleSingleScreen({
     super.key,
   });
-
+  SingleArticleController singleArticleController =
+      Get.put(SingleArticleController());
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     final Size size = MediaQuery.of(context).size;
-
+    
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -24,20 +26,10 @@ class ArticleSingleScreen extends StatelessWidget {
             Stack(
               children: [
                 CachedNetworkImage(
-                    imageUrl: "",
-                    imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          // image: DecorationImage(
-                          // image: imageProvider, fit: BoxFit.cover)),
-                          // foregroundDecoration: BoxDecoration(
-                          //     gradient: const LinearGradient(
-                          //         colors: GradiantColors.blogPostGradint,
-                          //         begin: Alignment.bottomCenter,
-                          //         end: Alignment.topCenter),
-                          //     borderRadius: BorderRadius.circular(16)),
-                        ),
+                    imageUrl:
+                        singleArticleController.articleInfoModel.value.image!,
+                    imageBuilder: (context, imageProvider) =>
+                        Image(image: imageProvider),
                     placeholder: (context, url) => const Loading(),
                     errorWidget: (context, url, error) =>
                         Assets.images.singlePlaceHolder.image()),
@@ -86,7 +78,7 @@ class ArticleSingleScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'رازهای اساسینز کرید والهالا؛ از هری پاتر و ارباب حلقه‌ها تا دارک سولز',
+               singleArticleController.articleInfoModel.value.title!,
                 maxLines: 2,
                 style: themeData.textTheme.titleLarge,
               ),
@@ -100,14 +92,14 @@ class ArticleSingleScreen extends StatelessWidget {
                     width: 16,
                   ),
                   Text(
-                    'فاطمه امیری',
+                    singleArticleController.articleInfoModel.value.author!,
                     style: themeData.textTheme.headline4,
                   ),
                   const SizedBox(
                     width: 16,
                   ),
                   Text(
-                    '2 روز پیش',
+                    singleArticleController.articleInfoModel.value.createdAt!,
                     style: themeData.textTheme.caption,
                   ),
                 ],
@@ -116,9 +108,7 @@ class ArticleSingleScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20),
               child: HtmlWidget(
-                """چند ماه پیش جدیدترین قسمت از مجموعه بازی‌های اساسینز کرید عرضه شد. بازی اساسینز کرید والهالا ماجرای قاتلان تاریخی را در سرزمین وایکینگ‌ها روایت می‌کند و تفاوت عظیمی با بازی‌های اصلی این سری دارد. البته چیزی که در این بازی حاضر هست و در دیگر بازی‌های این سری هم همیشه موجود بوده، حجم بالایی از محتوای مخفی و رازهای عجیب و غریب است. قصد داریم تا نگاهی به آن‌ها داشته باشیم تا در صورتی که آن‌ها را ندیده‌اید، غافل نمانید.
-        
-        سری بازی‌های اساسینز کرید این روز‌ها شباهت بیش‌تری به بازی‌های نقش‌آفرینی دارند تا اساسینز کرید. گیم‌پلی این بازی‌ها تا حد زیادی تغییر کرده و المان‌های نقش‌آفرینی زیادی به آن‌ها اضافه شده. بازی اساسینز کرید والهالا همانند بازی‌های نقش‌آفرینی بسیار بزرگ شده و جارو کردن دنیای پهناور آن بیش‌تر از صد ساعت زمان می‌خواهد. در میان این نقشه‌ی بزرگ، نکات مخفی زیادی که در جوامع گیمرها به آن‌ها «ایستر اگ» (Easter Egg) گفته می‌شود وجود دارند.""",
+                singleArticleController.articleInfoModel.value.content!,
                 textStyle: themeData.textTheme.caption,
                 enableCaching: true,
                 onLoadingBuilder: (context, element, loadingProgress) =>

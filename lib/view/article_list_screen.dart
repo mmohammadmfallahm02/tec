@@ -35,7 +35,7 @@ class ArticleListScreen extends StatelessWidget {
                         singleArticleController.id.value =
                             int.parse(article.id!);
                         Get.to(
-                          const ArticleSingleScreen(),
+                           ArticleSingleScreen(),
                         );
                       },
                       child: SizedBox(
