@@ -6,7 +6,8 @@ import 'package:tec/component/my_color.dart';
 import 'package:tec/component/my_strings.dart';
 import 'package:tec/controller/home_screen_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
-import 'package:tec/models/fake_data.dart';
+
+import '../../models/fake_data.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({
