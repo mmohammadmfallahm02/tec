@@ -15,7 +15,7 @@ class SingleArticleController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    getArticleInfo();
+  
   }
 
   getArticleInfo() async {

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:tec/component/my_color.dart';
-import 'package:tec/view/article_list_screen.dart';
+import 'package:tec/view/article_screen/article_list_screen.dart';
 
 
 void main() {

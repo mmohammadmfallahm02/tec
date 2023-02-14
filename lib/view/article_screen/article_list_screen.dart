@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:tec/component/my_component.dart';
 import 'package:tec/controller/list_article_controller.dart';
 import 'package:tec/controller/single_article_controller.dart';
-import 'package:tec/view/article_single_screen.dart';
+import 'package:tec/view/article_screen/article_single_screen.dart';
 
 class ArticleListScreen extends StatelessWidget {
   ArticleListScreen({super.key});
@@ -35,7 +35,7 @@ class ArticleListScreen extends StatelessWidget {
                         singleArticleController.id.value =
                             int.parse(article.id!);
                         Get.to(
-                           ArticleSingleScreen(),
+                           const ArticleSingleScreen(),
                         );
                       },
                       child: SizedBox(
