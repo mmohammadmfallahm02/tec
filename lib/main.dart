@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:tec/component/my_color.dart';
 import 'package:tec/view/article_screen/article_list_screen.dart';
 
-
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: SolidColors.statusBarColor,
@@ -104,6 +103,6 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w700),
             )),
         // home: const SplashScreen());
-        home:   ArticleListScreen());
+        home: ArticleListScreen(title: 'مقالات جدید'));
   }
 }

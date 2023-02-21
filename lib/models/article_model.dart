@@ -30,7 +30,7 @@ class ArticleModel {
         image = ApiConstant.hostDlUrl + json['image'],
         catId = json['cat_id'],
         catName = json['cat_name'],
-        author = json['author'],
+        author = json['author']??'ساسان صفری',
         view = json['view'],
         status = json['status'],
         createdAt = json['created_at'];

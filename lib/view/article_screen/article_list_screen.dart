@@ -7,7 +7,8 @@ import 'package:tec/controller/single_article_controller.dart';
 import 'package:tec/view/article_screen/article_single_screen.dart';
 
 class ArticleListScreen extends StatelessWidget {
-  ArticleListScreen({super.key});
+  final String title;
+  ArticleListScreen({super.key, required this.title});
   ListArticleController listArticleController =
       Get.put(ListArticleController());
   SingleArticleController singleArticleController =
@@ -16,7 +17,7 @@ class ArticleListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return Scaffold(
-      appBar: appbar('مقالات جدید'),
+      appBar: appbar(title),
       body: SafeArea(
           child: Obx(
         () => Padding(
@@ -35,7 +36,7 @@ class ArticleListScreen extends StatelessWidget {
                         singleArticleController.id.value =
                             int.parse(article.id!);
                         Get.to(
-                           const ArticleSingleScreen(),
+                          const ArticleSingleScreen(),
                         );
                       },
                       child: SizedBox(

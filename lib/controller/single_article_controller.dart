@@ -12,13 +12,8 @@ class SingleArticleController extends GetxController {
   RxList<ArticleModel> relatedArticle = RxList();
   RxBool loading = false.obs;
 
-  @override
-  onInit() {
-    super.onInit();
-  
-  }
-
   getArticleInfo() async {
+    articleInfoModel = ArticleInfoModel().obs;
     loading.value = true;
     // TODO user id is hard code
     var userId = '';
@@ -26,10 +21,12 @@ class SingleArticleController extends GetxController {
         '${ApiConstant.baseUrl}article/get.php?command=info&id=$id&user_id=$userId');
     if (response.statusCode == 200) {
       articleInfoModel.value = ArticleInfoModel.fromJson(response.data);
+      tagsList.clear();
       response.data['tags'].forEach((element) {
             return tagsList.add(TagModel.fromJson(element));
           }) ??
           [];
+      relatedArticle.clear();
       response.data['related'].forEach((element) {
             return relatedArticle.add(ArticleModel.fromJson(element));
           }) ??
