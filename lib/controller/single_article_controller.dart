@@ -4,15 +4,16 @@ import 'package:tec/models/article_info_model.dart';
 import 'package:tec/models/article_model.dart';
 import 'package:tec/models/tag_model.dart';
 import 'package:tec/services/dio_service.dart';
+import 'package:tec/view/article_screen/article_single_screen.dart';
 
 class SingleArticleController extends GetxController {
-  RxInt id = RxInt(0);
+  // RxInt id = RxInt(0);
   Rx<ArticleInfoModel> articleInfoModel = ArticleInfoModel().obs;
   RxList<TagModel> tagsList = RxList();
   RxList<ArticleModel> relatedArticle = RxList();
   RxBool loading = false.obs;
 
-  getArticleInfo() async {
+  getArticleInfo(int id) async {
     articleInfoModel = ArticleInfoModel().obs;
     loading.value = true;
     // TODO user id is hard code
@@ -33,5 +34,6 @@ class SingleArticleController extends GetxController {
           [];
     }
     loading.value = false;
+    Get.to(ArticleSingleScreen());
   }
 }

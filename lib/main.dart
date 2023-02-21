@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:tec/component/my_color.dart';
 import 'package:tec/view/article_screen/article_list_screen.dart';
+import 'package:tec/view/splash_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -102,7 +103,7 @@ class MyApp extends StatelessWidget {
                   color: Color.fromARGB(255, 70, 70, 70),
                   fontWeight: FontWeight.w700),
             )),
-        // home: const SplashScreen());
-        home: ArticleListScreen(title: 'مقالات جدید'));
+        home: const SplashScreen());
+        // home: ArticleListScreen(title: 'مقالات جدید'));
   }
 }

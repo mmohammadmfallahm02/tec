@@ -33,11 +33,8 @@ class ArticleListScreen extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(16),
                       onTap: () {
-                        singleArticleController.id.value =
-                            int.parse(article.id!);
-                        Get.to(
-                          const ArticleSingleScreen(),
-                        );
+                        singleArticleController
+                            .getArticleInfo(int.parse(article.id!));
                       },
                       child: SizedBox(
                         height: 120,

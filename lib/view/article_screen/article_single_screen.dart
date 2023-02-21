@@ -21,11 +21,11 @@ class ArticleSingleScreen extends StatefulWidget {
 class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
   SingleArticleController singleArticleController =
       Get.put(SingleArticleController());
-  @override
-  void initState() {
-    super.initState();
-    singleArticleController.getArticleInfo();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   singleArticleController.getArticleInfo();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -155,8 +155,10 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
                                       onTap: () async {
                                         await Get.find<ListArticleController>()
                                             .getArticleListWithTagId(
-                                                tag.id!, );
-                                        Get.to(ArticleListScreen(title:tag.title!));
+                                          tag.id!,
+                                        );
+                                        Get.to(ArticleListScreen(
+                                            title: tag.title!));
                                       },
                                       child: Container(
                                         alignment: Alignment.center,
@@ -215,80 +217,89 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
             // blog item
             return Padding(
               padding: EdgeInsets.fromLTRB(4, 8, index == 0 ? 25 : 16, 8),
-              child: Column(
-                children: [
-                  // blog post image
-                  SizedBox(
-                    height: size.height / 5.9,
-                    width: size.width / 2.6,
-                    child: Stack(
-                      children: [
-                        CachedNetworkImage(
-                            imageUrl: article.image!,
-                            imageBuilder: (context, imageProvider) => Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16),
-                                      image: DecorationImage(
-                                          image: imageProvider,
-                                          fit: BoxFit.cover)),
-                                  foregroundDecoration: BoxDecoration(
-                                      gradient: const LinearGradient(
-                                          colors:
-                                              GradiantColors.blogPostGradint,
-                                          begin: Alignment.bottomCenter,
-                                          end: Alignment.topCenter),
-                                      borderRadius: BorderRadius.circular(16)),
-                                ),
-                            placeholder: (context, url) => const Loading(),
-                            errorWidget: (context, url, error) => const Icon(
-                                  Icons.image_not_supported_outlined,
-                                  color: Colors.grey,
-                                  size: 30,
-                                )),
-                        Positioned(
-                            bottom: 8,
-                            left: 0,
-                            right: 0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(article.author!,
-                                    style: themeData.textTheme.subtitle1),
-                                Row(
-                                  children: [
-                                    Text(article.view!,
-                                        style: themeData.textTheme.subtitle1),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    const Icon(
-                                      Icons.remove_red_eye_sharp,
-                                      color: Colors.white,
-                                      size: 16,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ))
-                      ],
+              child: GestureDetector(
+                onTap: () {
+                  singleArticleController
+                      .getArticleInfo(int.parse(article.id!));
+                },
+                child: Column(
+                  children: [
+                    // blog post image
+                    SizedBox(
+                      height: size.height / 5.9,
+                      width: size.width / 2.6,
+                      child: Stack(
+                        children: [
+                          CachedNetworkImage(
+                              imageUrl: article.image!,
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(16),
+                                        image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover)),
+                                    foregroundDecoration: BoxDecoration(
+                                        gradient: const LinearGradient(
+                                            colors:
+                                                GradiantColors.blogPostGradint,
+                                            begin: Alignment.bottomCenter,
+                                            end: Alignment.topCenter),
+                                        borderRadius:
+                                            BorderRadius.circular(16)),
+                                  ),
+                              placeholder: (context, url) => const Loading(),
+                              errorWidget: (context, url, error) => const Icon(
+                                    Icons.image_not_supported_outlined,
+                                    color: Colors.grey,
+                                    size: 30,
+                                  )),
+                          Positioned(
+                              bottom: 8,
+                              left: 0,
+                              right: 0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(article.author!,
+                                      style: themeData.textTheme.subtitle1),
+                                  Row(
+                                    children: [
+                                      Text(article.view!,
+                                          style: themeData.textTheme.subtitle1),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      const Icon(
+                                        Icons.remove_red_eye_sharp,
+                                        color: Colors.white,
+                                        size: 16,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ))
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  // blog post text
-                  Expanded(
-                    child: SizedBox(
-                        width: size.width / 2.6,
-                        child: Text(
-                          article.title!,
-                          maxLines: 2,
-                          softWrap: true,
-                          // textAlign: TextAlign.justify,
-                          overflow: TextOverflow.fade,
-                        )),
-                  )
-                ],
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    // blog post text
+                    Expanded(
+                      child: SizedBox(
+                          width: size.width / 2.6,
+                          child: Text(
+                            article.title!,
+                            maxLines: 2,
+                            softWrap: true,
+                            // textAlign: TextAlign.justify,
+                            overflow: TextOverflow.fade,
+                          )),
+                    )
+                  ],
+                ),
               ),
             );
           }),
