@@ -160,7 +160,7 @@ class BottomNavigation extends StatelessWidget {
         height: size.height / 10,
         decoration: const BoxDecoration(
             gradient: LinearGradient(
-                colors: GradiantColors.bottomNavBackground,
+                colors: GradientColors.bottomNavBackground,
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter)),
         child: Padding(
@@ -170,7 +170,7 @@ class BottomNavigation extends StatelessWidget {
             height: size.height / 8,
             decoration: BoxDecoration(
                 gradient:
-                    const LinearGradient(colors: GradiantColors.bottomNav),
+                    const LinearGradient(colors: GradientColors.bottomNav),
                 borderRadius: BorderRadius.circular(26)),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

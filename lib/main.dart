@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:tec/component/my_color.dart';
-import 'package:tec/view/article_screen/article_list_screen.dart';
 import 'package:tec/view/splash_screen.dart';
 
 void main() {
@@ -104,6 +102,5 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w700),
             )),
         home: const SplashScreen());
-        // home: ArticleListScreen(title: 'مقالات جدید'));
   }
 }

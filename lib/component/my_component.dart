@@ -46,7 +46,7 @@ class MainTags extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
           gradient: const LinearGradient(
-              colors: GradiantColors.tags,
+              colors: GradientColors.tags,
               begin: Alignment.centerRight,
               end: Alignment.centerLeft),
           borderRadius: BorderRadius.circular(18)),
@@ -103,7 +103,7 @@ class Loading extends StatelessWidget {
   }
 }
 
-PreferredSize appbar(String title) {
+PreferredSize appBar(String title) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(60),
     child: Padding(
@@ -115,19 +115,22 @@ PreferredSize appbar(String title) {
           Center(
             child: Text(
               title,
-              style: appbarTextStyle,
+              style: appBarTextStyle,
             ),
           )
         ],
-        leading: Container(
-          width: 50,
-          height: 50,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: SolidColors.primaryColor.withAlpha(100)),
-          child: const Icon(
-            Icons.keyboard_arrow_right,
-            size: 40,
+        leading: GestureDetector(
+          onTap: () => Get.back(),
+          child: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: SolidColors.primaryColor.withAlpha(100)),
+            child: const Icon(
+              Icons.keyboard_arrow_right,
+              size: 40,
+            ),
           ),
         ),
       ),

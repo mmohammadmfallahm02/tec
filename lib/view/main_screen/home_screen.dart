@@ -112,8 +112,8 @@ class HomeScreen extends StatelessWidget {
                                               fit: BoxFit.cover)),
                                       foregroundDecoration: BoxDecoration(
                                           gradient: const LinearGradient(
-                                              colors: GradiantColors
-                                                  .blogPostGradint,
+                                              colors: GradientColors
+                                                  .blogPostGradient,
                                               begin: Alignment.bottomCenter,
                                               end: Alignment.topCenter),
                                           borderRadius:
@@ -244,7 +244,7 @@ class HomeScreen extends StatelessWidget {
               foregroundDecoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 gradient: const LinearGradient(
-                  colors: GradiantColors.homePosterCoverGradiant,
+                  colors: GradientColors.homePosterCoverGradient,
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),

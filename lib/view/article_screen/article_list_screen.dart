@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:tec/component/my_component.dart';
 import 'package:tec/controller/list_article_controller.dart';
 import 'package:tec/controller/single_article_controller.dart';
-import 'package:tec/view/article_screen/article_single_screen.dart';
 
 class ArticleListScreen extends StatelessWidget {
   final String title;
@@ -17,7 +16,7 @@ class ArticleListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return Scaffold(
-      appBar: appbar(title),
+      appBar: appBar(title),
       body: SafeArea(
           child: Obx(
         () => Padding(
@@ -54,10 +53,15 @@ class ArticleListScreen extends StatelessWidget {
                                         fit: BoxFit.cover)),
                               ),
                               placeholder: (context, url) => const Loading(),
-                              errorWidget: (context, url, error) => const Icon(
-                                Icons.image_not_supported_outlined,
-                                size: 50,
-                                color: Colors.grey,
+                              errorWidget: (context, url, error) =>
+                                  const SizedBox(
+                                height: 120,
+                                width: 120,
+                                child: Icon(
+                                  Icons.image_not_supported_outlined,
+                                  size: 50,
+                                  color: Colors.grey,
+                                ),
                               ),
                             ),
                             const SizedBox(

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tec/component/my_color.dart';
 import 'package:tec/component/my_component.dart';
 import 'package:tec/controller/list_article_controller.dart';
@@ -58,34 +59,46 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
                                   height: 60,
                                   decoration: const BoxDecoration(
                                       gradient: LinearGradient(
-                                          colors: GradiantColors
-                                              .articleSingleAppbarGradiant,
+                                          colors: GradientColors
+                                              .articleSingleAppBarGradient,
                                           end: Alignment.bottomCenter,
                                           begin: Alignment.topCenter)),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    children: const [
-                                      SizedBox(
+                                    children: [
+                                      const SizedBox(
                                         width: 16,
                                       ),
-                                      Icon(
-                                        Icons.arrow_back,
-                                        color: Colors.white,
+                                      GestureDetector(
+                                        onTap: () => Get.back(),
+                                        child: const Icon(
+                                          Icons.arrow_back,
+                                          color: Colors.white,
+                                        ),
                                       ),
-                                      Expanded(child: SizedBox()),
-                                      Icon(
+                                      const Expanded(child: SizedBox()),
+                                      const Icon(
                                         Icons.bookmark_outline,
                                         color: Colors.white,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 16,
                                       ),
-                                      Icon(
-                                        Icons.share,
-                                        color: Colors.white,
+                                      GestureDetector(
+                                        onTap: () async {
+                                          await Share.share(
+                                              singleArticleController
+                                                  .articleInfoModel
+                                                  .value
+                                                  .title!);
+                                        },
+                                        child: const Icon(
+                                          Icons.share,
+                                          color: Colors.white,
+                                        ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 16,
                                       ),
                                     ],
@@ -242,7 +255,7 @@ class _ArticleSingleScreenState extends State<ArticleSingleScreen> {
                                     foregroundDecoration: BoxDecoration(
                                         gradient: const LinearGradient(
                                             colors:
-                                                GradiantColors.blogPostGradint,
+                                                GradientColors.blogPostGradient,
                                             begin: Alignment.bottomCenter,
                                             end: Alignment.topCenter),
                                         borderRadius:

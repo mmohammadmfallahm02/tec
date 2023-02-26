@@ -20,7 +20,7 @@ class SolidColors {
   static const Color surfaceColor = Color.fromARGB(255, 242, 242, 242);
 }
 
-class GradiantColors {
+class GradientColors {
   static const List<Color> bottomNav = [
     Color.fromARGB(255, 25, 0, 94),
     Color.fromARGB(255, 68, 4, 87)
@@ -29,12 +29,12 @@ class GradiantColors {
     Color.fromARGB(255, 0, 0, 0),
     Color.fromARGB(255, 63, 63, 63)
   ];
-  static const List<Color> homePosterCoverGradiant = [
+  static const List<Color> homePosterCoverGradient = [
     Color.fromARGB(0, 0, 0, 0),
     Color.fromARGB(130, 72, 20, 88),
     Color.fromARGB(255, 28, 20, 81),
   ];
-  static const List<Color> blogPostGradint = [
+  static const List<Color> blogPostGradient = [
     Color.fromARGB(255, 0, 0, 0),
     Color.fromARGB(50, 0, 0, 0),
     Color.fromARGB(0, 0, 0, 0)
@@ -42,7 +42,8 @@ class GradiantColors {
   static const List<Color> bottomNavBackground = [
     Color.fromARGB(255, 255, 255, 255),
     Color.fromARGB(0, 255, 255, 255)
-  ];static const List<Color> articleSingleAppbarGradiant = [
+  ];
+  static const List<Color> articleSingleAppBarGradient = [
     Color.fromARGB(255, 46, 3, 71),
     Color.fromARGB(0, 0, 0, 0)
   ];
