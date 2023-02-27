@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:tec/component/my_strings.dart';
+import 'package:tec/controller/register_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/view/my_category.dart';
 // import 'package:validators/validators.dart';
 
 class RegisterIntro extends StatelessWidget {
-  const RegisterIntro({super.key});
+  RegisterIntro({super.key});
+
+  RegisterController registerController = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +90,7 @@ class RegisterIntro extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(48, 32, 48, 32),
                           child: TextField(
+                            controller: registerController.emailController,
                             onChanged: (value) {
                               // print('is Email ${isEmail(value)}');
                             },
@@ -101,7 +106,8 @@ class RegisterIntro extends StatelessWidget {
                               fixedSize: MaterialStateProperty.all(
                                   const Size(150, 45)),
                             ),
-                            onPressed: () {
+                            onPressed: () async{
+                              registerController.register();
                               Navigator.pop(context);
                               _activateCodeBottomSheet(
                                   context, size, themeData);
@@ -142,6 +148,7 @@ class RegisterIntro extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(48, 32, 48, 32),
                           child: TextField(
+                            controller: registerController.activeCodeController,
                             onChanged: (value) {},
                             style: themeData.textTheme.subtitle2,
                             textAlign: TextAlign.center,
@@ -155,11 +162,12 @@ class RegisterIntro extends StatelessWidget {
                               fixedSize: MaterialStateProperty.all(
                                   const Size(150, 45)),
                             ),
-                            onPressed: () {
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const MyCategory()));
+                            onPressed: () async{
+                              registerController.verify();
+                              // Navigator.of(context).pushReplacement(
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             const MyCategory()));
                             },
                             child: const Text('ادامه'))
                       ]),

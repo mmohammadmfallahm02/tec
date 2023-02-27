@@ -7,6 +7,7 @@ import 'package:tec/component/my_strings.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/view/main_screen/home_screen.dart';
 import 'package:tec/view/main_screen/profile_screen.dart';
+import 'package:tec/view/register/register_intro.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -179,7 +180,11 @@ class BottomNavigation extends StatelessWidget {
                       onPressed: () => changeScreen(0),
                       icon: Assets.icons.home.image()),
                   IconButton(
-                      onPressed: () => changeScreen(1),
+                      onPressed: () {
+                        // changeScreen(1);
+                        //TODO check login status
+                        Get.to(RegisterIntro());
+                      },
                       icon: Assets.icons.write.image()),
                   IconButton(
                       onPressed: () => changeScreen(2),
