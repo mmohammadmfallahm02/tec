@@ -12,6 +12,7 @@ import 'package:tec/view/article_screen/article_list_screen.dart';
 
 import '../../models/fake_data.dart';
 
+// ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   HomeScreen({
     Key? key,
@@ -53,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                         child: SeeMore(
                           bodyMargin: bodyMargin,
                           themeData: themeData,
-                          text: MyStrings.viewHotestBlog,
+                          text: MyStrings.viewHottestBlog,
                           icon: Assets.icons.bluePen.image(),
                         ),
                       ),
@@ -61,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                       SeeMore(
                           bodyMargin: bodyMargin,
                           themeData: themeData,
-                          text: MyStrings.viewHotestPodCasts,
+                          text: MyStrings.viewHottestPodCasts,
                           icon: Assets.icons.microphone.image()),
                       topPodcastList(),
                       const SizedBox(

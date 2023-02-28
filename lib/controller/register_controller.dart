@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:tec/component/api_constant.dart';
+import 'package:tec/component/storage_const.dart';
 import 'package:tec/services/dio_service.dart';
+import 'package:tec/view/main_screen/main_screen.dart';
 
 class RegisterController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -18,7 +23,7 @@ class RegisterController extends GetxController {
     var response = await DioService().postMethod(map, ApiConstant.postRegister);
     email = emailController.text;
     userId = response.data['user_id'];
-    print(response);
+    // debugPrint(response);
   }
 
   verify() async {
@@ -28,8 +33,20 @@ class RegisterController extends GetxController {
       'code': activeCodeController.text,
       'command': 'verify'
     };
-    print(map);
+    // debugPrint(map.toString());
     var response = await DioService().postMethod(map, ApiConstant.postRegister);
-    print(response.data);
+    // debugPrint(response.data);
+
+    if (response.data['response'] == 'verified') {
+      var box = GetStorage();
+      box.writeIfNull(token, response.data['token']);
+      box.writeIfNull(userId, response.data['user_id']);
+
+      Get.to(MainScreen());
+      // debugPrint('read....${box.read(token)}');
+      // debugPrint('read....${box.read(userId)}');
+    } else {
+      log('error');
+    }
   }
 }

@@ -34,6 +34,6 @@ class SingleArticleController extends GetxController {
           [];
     }
     loading.value = false;
-    Get.to(ArticleSingleScreen());
+    Get.to(const ArticleSingleScreen());
   }
 }

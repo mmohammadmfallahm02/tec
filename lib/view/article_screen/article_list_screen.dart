@@ -5,6 +5,7 @@ import 'package:tec/component/my_component.dart';
 import 'package:tec/controller/list_article_controller.dart';
 import 'package:tec/controller/single_article_controller.dart';
 
+// ignore: must_be_immutable
 class ArticleListScreen extends StatelessWidget {
   final String title;
   ArticleListScreen({super.key, required this.title});

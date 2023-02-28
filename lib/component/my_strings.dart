@@ -1,7 +1,8 @@
 class MyStrings {
-  static const String viewHotestBlog = "مشاهده داغ ترین نوشته ها ";
-  static const String techBlogGithubUrl = "https://github.com/sasansafari/techblog";
-  static const String viewHotestPodCasts = "مشاهده داغ ترین پادکست ها";
+  static const String viewHottestBlog = "مشاهده داغ ترین نوشته ها ";
+  static const String techBlogGithubUrl =
+      "https://github.com/sasansafari/techblog";
+  static const String viewHottestPodCasts = "مشاهده داغ ترین پادکست ها";
   static const String relatedArticle = "نوشته های مرتبط";
   static const String submitArticle = "ارسال مقاله";
   static const String submitPodcasts = "ارسال پادکست";

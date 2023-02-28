@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:tec/component/my_strings.dart';
 import 'package:tec/controller/register_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
-import 'package:tec/view/my_category.dart';
 // import 'package:validators/validators.dart';
 
+// ignore: must_be_immutable
 class RegisterIntro extends StatelessWidget {
   RegisterIntro({super.key});
 

@@ -1,7 +1,7 @@
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/models/data_models.dart';
 
-// homeposter fake data
+// homePoster fake data
 Map homePagePosterMap = {
   "ImageAssets": Assets.images.posterTest.path,
   "writer": "ملیکا عزیزی",
