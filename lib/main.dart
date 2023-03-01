@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tec/component/my_color.dart';
 import 'package:tec/my_http_overrides.dart';
+import 'package:tec/view/binding.dart';
 import 'package:tec/view/splash_screen.dart';
 
 void main() async {
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // final ThemeData themeData = Theme.of(context);
     return GetMaterialApp(
+        initialBinding: RegisterBinding(),
         debugShowCheckedModeBanner: false,
         locale: const Locale('fa'),
         title: 'Flutter Demo',

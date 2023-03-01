@@ -4,17 +4,18 @@ import 'package:share_plus/share_plus.dart';
 import 'package:tec/component/my_color.dart';
 import 'package:tec/component/my_component.dart';
 import 'package:tec/component/my_strings.dart';
+import 'package:tec/controller/register_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/view/main_screen/home_screen.dart';
 import 'package:tec/view/main_screen/profile_screen.dart';
-import 'package:tec/view/register/register_intro.dart';
-
-final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 // ignore: must_be_immutable
 class MainScreen extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
   RxInt selectedPageIndex = 0.obs;
+
   MainScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -140,6 +141,7 @@ class MainScreen extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({
     Key? key,
@@ -184,7 +186,7 @@ class BottomNavigation extends StatelessWidget {
                       onPressed: () {
                         // changeScreen(1);
                         //TODO check login status
-                        Get.to(RegisterIntro());
+                        Get.find<RegisterController>().toggleLogin();
                       },
                       icon: Assets.icons.write.image()),
                   IconButton(

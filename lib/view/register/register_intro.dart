@@ -10,7 +10,7 @@ import 'package:tec/gen/assets.gen.dart';
 class RegisterIntro extends StatelessWidget {
   RegisterIntro({super.key});
 
-  RegisterController registerController = Get.put(RegisterController());
+  var registerController = Get.find<RegisterController>();
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,7 @@ class RegisterIntro extends StatelessWidget {
                               fixedSize: MaterialStateProperty.all(
                                   const Size(150, 45)),
                             ),
-                            onPressed: () async{
+                            onPressed: () async {
                               registerController.register();
                               Navigator.pop(context);
                               _activateCodeBottomSheet(
@@ -162,7 +162,7 @@ class RegisterIntro extends StatelessWidget {
                               fixedSize: MaterialStateProperty.all(
                                   const Size(150, 45)),
                             ),
-                            onPressed: () async{
+                            onPressed: () async {
                               registerController.verify();
                               // Navigator.of(context).pushReplacement(
                               //     MaterialPageRoute(
