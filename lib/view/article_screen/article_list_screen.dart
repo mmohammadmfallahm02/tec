@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:tec/component/my_component.dart';
 import 'package:tec/controller/list_article_controller.dart';
 import 'package:tec/controller/single_article_controller.dart';
+import 'package:tec/main.dart';
 
 // ignore: must_be_immutable
 class ArticleListScreen extends StatelessWidget {
@@ -35,6 +36,7 @@ class ArticleListScreen extends StatelessWidget {
                       onTap: () {
                         singleArticleController
                             .getArticleInfo(int.parse(article.id!));
+                        Get.toNamed(routeArticleSingleScreen);
                       },
                       child: SizedBox(
                         height: 120,

@@ -45,8 +45,8 @@ class RegisterController extends GetxController {
     switch (status) {
       case 'verified':
         var box = GetStorage();
-        box.writeIfNull(token, response.data['token']);
-        box.writeIfNull(userId, response.data['user_id']);
+        box.write(token, response.data['token']);
+        box.write(userId, response.data['user_id']);
 
         Get.offAll(() =>  MainScreen());
         // debugPrint('read....${box.read(token)}');
