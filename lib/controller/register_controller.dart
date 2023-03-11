@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tec/component/api_constant.dart';
 import 'package:tec/component/storage_const.dart';
+import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/services/dio_service.dart';
 import 'package:tec/view/main_screen/main_screen.dart';
 import 'package:tec/view/register/register_intro.dart';
@@ -48,7 +49,7 @@ class RegisterController extends GetxController {
         box.write(token, response.data['token']);
         box.write(userId, response.data['user_id']);
 
-        Get.offAll(() =>  MainScreen());
+        Get.offAll(() => MainScreen());
         // debugPrint('read....${box.read(token)}');
         // debugPrint('read....${box.read(userId)}');
         break;
@@ -68,8 +69,77 @@ class RegisterController extends GetxController {
     if (GetStorage().read(token) == null) {
       Get.to(RegisterIntro());
     } else {
-      debugPrint('post screen');
+      routeToRightBottomSheet();
     }
+  }
+
+  routeToRightBottomSheet() {
+    Get.bottomSheet(Container(
+      height: Get.height / 3,
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          )),
+      child: Padding(
+        padding: const EdgeInsets.all(30),
+        child: Column(children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Assets.images.tcbot.svg(height: 50),
+              const SizedBox(
+                width: 20,
+              ),
+              const Text('دونسته هات رو با بقیه به اشتراک بذار ...')
+            ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          const Text(
+            '''فکر کن !!  اینجا بودنت به این معناست که یک گیک تکنولوژی هستی دونسته هات رو با  جامعه‌ی گیک های فارسی زبان به اشتراک بذار..''',
+            textAlign: TextAlign.justify,
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  debugPrint('write article');
+                },
+                child: Row(
+                  children: [
+                    Assets.icons.writeArticle.image(width: 30),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    const Text('مدیریت مقاله ها')
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {debugPrint('write podcast');},
+                child: Row(
+                  children: [
+                    Assets.icons.writeMicrophone.image(width: 30),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    const Text('مدیریت پادکست ها')
+                  ],
+                ),
+              )
+            ],
+          )
+        ]),
+      ),
+    ));
   }
 }
 //TODO fix snackbar issue https://www.youtube.com/watch?v=jqm_YahHU5k

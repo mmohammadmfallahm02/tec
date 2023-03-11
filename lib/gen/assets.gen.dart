@@ -43,6 +43,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/write.png
   AssetGenImage get write => const AssetGenImage('assets/icons/write.png');
 
+  /// File path: assets/icons/write_article.png
+  AssetGenImage get writeArticle =>
+      const AssetGenImage('assets/icons/write_article.png');
+
+  /// File path: assets/icons/write_microphone.png
+  AssetGenImage get writeMicrophone =>
+      const AssetGenImage('assets/icons/write_microphone.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         bluePen,
@@ -53,7 +61,9 @@ class $AssetsIconsGen {
         microphone,
         search,
         user,
-        write
+        write,
+        writeArticle,
+        writeMicrophone
       ];
 }
 
