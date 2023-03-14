@@ -5,6 +5,7 @@ import 'package:tec/component/my_component.dart';
 import 'package:tec/component/my_strings.dart';
 import 'package:tec/controller/article_controller/manage_article_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
+import 'package:tec/main.dart';
 // import 'package:validators/validators.dart';
 
 // ignore: must_be_immutable
@@ -28,7 +29,9 @@ class ManageArticle extends StatelessWidget {
             width: size.width * 0.75,
             child: ElevatedButton(
               clipBehavior: Clip.none,
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(NamedRoute.routeManageArticleSingleScreen);
+              },
               child: const Text(
                 'بریم برای نوشتن یه مقاله باحال',
                 maxLines: 1,

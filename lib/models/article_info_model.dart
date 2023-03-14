@@ -34,7 +34,7 @@ class ArticleInfoModel {
     image = ApiConstant.hostDlUrl + info['image'];
     catId = info['cat_id'];
     catName = info['cat_name'];
-    author = info['author']??'ساسان صفری';
+    author = info['author'] ?? 'ساسان صفری';
     view = info['view'];
     status = info['status'];
     createdAt = info['created_at'];

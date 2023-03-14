@@ -9,6 +9,7 @@ import 'package:tec/my_http_overrides.dart';
 import 'package:tec/binding.dart';
 import 'package:tec/view/article_screen/article_single_screen.dart';
 import 'package:tec/view/article_screen/manage_article.dart';
+import 'package:tec/view/article_screen/manage_single_article_screen.dart';
 import 'package:tec/view/main_screen/main_screen.dart';
 import 'package:tec/view/splash_screen.dart';
 
@@ -46,7 +47,11 @@ class MyApp extends StatelessWidget {
           GetPage(
               name: NamedRoute.routeManageArticleScreen,
               page: () => ManageArticle(),
-              binding: ManageArticleBinding())
+              binding: ManageArticleBinding()),
+          GetPage(
+              name: NamedRoute.routeManageArticleSingleScreen,
+              page: () => const ManageArticleSingleScreen(),
+              binding: ManageArticleBinding()),
         ],
         theme: lightTheme(),
         home: const SplashScreen());
@@ -136,4 +141,5 @@ class NamedRoute {
   static String routeMainScreen = '/MainScreen';
   static String routeArticleSingleScreen = '/ArticleSingleScreen';
   static String routeManageArticleScreen = '/ManageArticle';
+  static String routeManageArticleSingleScreen = '/ManageArticleSingle';
 }
