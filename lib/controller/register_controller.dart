@@ -6,7 +6,6 @@ import 'package:tec/component/storage_const.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/main.dart';
 import 'package:tec/services/dio_service.dart';
-import 'package:tec/view/article_screen/manage_article.dart';
 import 'package:tec/view/main_screen/main_screen.dart';
 import 'package:tec/view/register/register_intro.dart';
 
@@ -48,8 +47,8 @@ class RegisterController extends GetxController {
     switch (status) {
       case 'verified':
         var box = GetStorage();
-        box.write(token, response.data['token']);
-        box.write(userId, response.data['user_id']);
+        box.write(StorageKey.token, response.data['token']);
+        box.write(StorageKey.userId, response.data['user_id']);
 
         Get.offAll(() => MainScreen());
         // debugPrint('read....${box.read(token)}');
@@ -68,7 +67,7 @@ class RegisterController extends GetxController {
   }
 
   toggleLogin() {
-    if (GetStorage().read(token) == null) {
+    if (GetStorage().read(StorageKey.token) == null) {
       Get.to(RegisterIntro());
     } else {
       routeToRightBottomSheet();
