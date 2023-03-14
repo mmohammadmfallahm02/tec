@@ -8,6 +8,7 @@ import 'package:tec/component/my_color.dart';
 import 'package:tec/my_http_overrides.dart';
 import 'package:tec/binding.dart';
 import 'package:tec/view/article_screen/article_single_screen.dart';
+import 'package:tec/view/article_screen/manage_article.dart';
 import 'package:tec/view/main_screen/main_screen.dart';
 import 'package:tec/view/splash_screen.dart';
 
@@ -35,13 +36,17 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         getPages: [
           GetPage(
-              name: routeMainScreen,
+              name: NamedRoute.routeMainScreen,
               page: () => MainScreen(),
               binding: RegisterBinding()),
           GetPage(
-              name: routeArticleSingleScreen,
+              name: NamedRoute.routeArticleSingleScreen,
               page: () => const ArticleSingleScreen(),
-              binding: ArticleBinding())
+              binding: ArticleBinding()),
+          GetPage(
+              name: NamedRoute.routeManageArticleScreen,
+              page: () => ManageArticle(),
+              binding: ManageArticleBinding())
         ],
         theme: lightTheme(),
         home: const SplashScreen());
@@ -127,5 +132,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-const String routeMainScreen = '/MainScreen';
-const String routeArticleSingleScreen = '/ArticleSingleScreen';
+class NamedRoute {
+  static String routeMainScreen = '/MainScreen';
+  static String routeArticleSingleScreen = '/ArticleSingleScreen';
+  static String routeManageArticleScreen = '/ManageArticle';
+}

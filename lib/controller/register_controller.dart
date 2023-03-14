@@ -4,7 +4,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tec/component/api_constant.dart';
 import 'package:tec/component/storage_const.dart';
 import 'package:tec/gen/assets.gen.dart';
+import 'package:tec/main.dart';
 import 'package:tec/services/dio_service.dart';
+import 'package:tec/view/article_screen/manage_article.dart';
 import 'package:tec/view/main_screen/main_screen.dart';
 import 'package:tec/view/register/register_intro.dart';
 
@@ -109,10 +111,11 @@ class RegisterController extends GetxController {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              
               buttonToWriteContent(
                   onTap: () {
-                    debugPrint('write article');
+                    // debugPrint('write article');
+                    // Get.to(ManageArticle());
+                    Get.toNamed(NamedRoute.routeManageArticleScreen);
                   },
                   icon: Assets.icons.writeArticle.image(width: 30),
                   title: 'مدیریت مقاله ها'),
