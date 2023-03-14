@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // final ThemeData themeData = Theme.of(context);
     return GetMaterialApp(
-        // initialBinding: RegisterBinding(),
+        initialBinding: RegisterBinding(),
         debugShowCheckedModeBanner: false,
         locale: const Locale('fa'),
         title: 'Flutter Demo',

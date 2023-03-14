@@ -15,6 +15,10 @@ class DioService {
         .then((response) {
       // log(response.toString());
       return response;
+    }).catchError((error) {
+      if (error is DioError) {
+        return error.response!;
+      }
     });
   }
 
@@ -27,6 +31,10 @@ class DioService {
             options: Options(responseType: ResponseType.json, method: 'POST'))
         .then((response) {
       return response;
+    }).catchError((error) {
+      if (error is DioError) {
+        return error.response!;
+      }
     });
   }
 }

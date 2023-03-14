@@ -109,37 +109,43 @@ class RegisterController extends GetxController {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              GestureDetector(
-                onTap: () {
-                  debugPrint('write article');
-                },
-                child: Row(
-                  children: [
-                    Assets.icons.writeArticle.image(width: 30),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    const Text('مدیریت مقاله ها')
-                  ],
-                ),
-              ),
-              GestureDetector(
-                onTap: () {debugPrint('write podcast');},
-                child: Row(
-                  children: [
-                    Assets.icons.writeMicrophone.image(width: 30),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    const Text('مدیریت پادکست ها')
-                  ],
-                ),
-              )
+              
+              buttonToWriteContent(
+                  onTap: () {
+                    debugPrint('write article');
+                  },
+                  icon: Assets.icons.writeArticle.image(width: 30),
+                  title: 'مدیریت مقاله ها'),
+              buttonToWriteContent(
+                  onTap: () {
+                    debugPrint('write podcast');
+                  },
+                  icon: Assets.icons.writeMicrophone.image(width: 30),
+                  title: 'مدیریت پادکست ها'),
             ],
           )
         ]),
       ),
     ));
+  }
+
+  GestureDetector buttonToWriteContent(
+      {Function()? onTap, required String title, required Image icon}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        color: Colors.white,
+        child: Row(
+          children: [
+            icon,
+            const SizedBox(
+              width: 8,
+            ),
+            const Text('مدیریت پادکست ها')
+          ],
+        ),
+      ),
+    );
   }
 }
 //TODO fix snackbar issue https://www.youtube.com/watch?v=jqm_YahHU5k
