@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tec/component/my_component.dart';
-import 'package:tec/component/my_color.dart';
-import 'package:tec/component/my_strings.dart';
+import 'package:tec/constant/my_color.dart';
+import 'package:tec/constant/my_strings.dart';
 import 'package:tec/controller/home_screen_controller.dart';
 import 'package:tec/controller/article_controller/list_article_controller.dart';
 import 'package:tec/controller/article_controller/single_article_controller.dart';
@@ -328,36 +328,3 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class SeeMore extends StatelessWidget {
-  const SeeMore({
-    Key? key,
-    required this.bodyMargin,
-    required this.themeData,
-    required this.text,
-    required this.icon,
-  }) : super(key: key);
-
-  final double bodyMargin;
-  final ThemeData themeData;
-  final String text;
-  final Image icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: bodyMargin, top: 25, bottom: 8),
-      child: Row(
-        children: [
-          ImageIcon(
-            icon.image,
-            color: SolidColors.seeMore,
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Text(text, style: themeData.textTheme.headline3),
-        ],
-      ),
-    );
-  }
-}

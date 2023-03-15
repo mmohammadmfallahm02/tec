@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:tec/component/storage_const.dart';
 import 'package:tec/models/article_info_model.dart';
 import 'package:tec/models/article_model.dart';
 import 'package:tec/models/tag_model.dart';
-import '../../component/api_constant.dart';
+import '../../constant/api_constant.dart';
 import '../../services/dio_service.dart';
 
 class ManageArticleController extends GetxController {

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:tec/component/my_color.dart';
+import 'package:tec/component/dimens.dart';
+import 'package:tec/constant/my_color.dart';
 import 'package:tec/component/my_component.dart';
-import 'package:tec/component/my_strings.dart';
+import 'package:tec/constant/my_strings.dart';
 import 'package:tec/controller/register_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/view/main_screen/home_screen.dart';
@@ -19,7 +20,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    final double bodyMargin = size.width / 16;
+    final bodyMargin = Dimens.bodyMargin;
     final ThemeData themeData = Theme.of(context);
     return SafeArea(
         child: Scaffold(

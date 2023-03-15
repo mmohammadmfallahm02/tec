@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tec/component/my_component.dart';
-import 'package:tec/component/my_color.dart';
-import 'package:tec/component/my_strings.dart';
+import 'package:tec/constant/my_color.dart';
+import 'package:tec/constant/my_strings.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/models/fake_data.dart';
 

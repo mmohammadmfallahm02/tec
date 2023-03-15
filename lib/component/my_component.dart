@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:tec/component/my_color.dart';
+import 'package:tec/constant/my_color.dart';
 import 'package:tec/component/text_style.dart';
 import 'package:tec/controller/home_screen_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
@@ -136,4 +136,37 @@ PreferredSize appBar(String title) {
       ),
     ),
   );
+}
+class SeeMore extends StatelessWidget {
+  const SeeMore({
+    Key? key,
+    required this.bodyMargin,
+    required this.themeData,
+    required this.text,
+    required this.icon,
+  }) : super(key: key);
+
+  final double bodyMargin;
+  final ThemeData themeData;
+  final String text;
+  final Image icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(right: bodyMargin, top: 25, bottom: 8),
+      child: Row(
+        children: [
+          ImageIcon(
+            icon.image,
+            color: SolidColors.seeMore,
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Text(text, style: themeData.textTheme.headline3),
+        ],
+      ),
+    );
+  }
 }

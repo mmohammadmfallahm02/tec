@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:tec/component/my_color.dart';
+import 'package:tec/constant/my_color.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/main.dart';
 

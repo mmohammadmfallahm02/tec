@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:tec/component/api_constant.dart';
+import 'package:tec/constant/api_constant.dart';
 import 'package:tec/component/storage_const.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/main.dart';

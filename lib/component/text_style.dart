@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tec/component/my_color.dart';
+import 'package:tec/constant/my_color.dart';
 
 TextStyle appBarTextStyle = const TextStyle(
     fontFamily: 'dana',

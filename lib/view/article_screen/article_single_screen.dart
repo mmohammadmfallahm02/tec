@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:tec/component/my_color.dart';
+import 'package:tec/constant/my_color.dart';
 import 'package:tec/component/my_component.dart';
 import 'package:tec/controller/article_controller/list_article_controller.dart';
 import 'package:tec/controller/article_controller/single_article_controller.dart';

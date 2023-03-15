@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tec/component/my_component.dart';
-import 'package:tec/component/my_strings.dart';
+import 'package:tec/constant/my_strings.dart';
 import 'package:tec/controller/article_controller/manage_article_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/main.dart';

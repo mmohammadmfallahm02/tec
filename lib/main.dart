@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:tec/component/my_color.dart';
+import 'package:tec/constant/my_color.dart';
 import 'package:tec/my_http_overrides.dart';
 import 'package:tec/binding.dart';
 import 'package:tec/view/article_screen/article_single_screen.dart';
