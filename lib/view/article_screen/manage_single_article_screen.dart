@@ -27,6 +27,25 @@ class ManageArticleSingleScreen extends StatefulWidget {
 class _ManageArticleSingleScreenState extends State<ManageArticleSingleScreen> {
   var manageArticleSingleController = Get.find<ManageArticleController>();
   FilePickerController filePickerController = Get.put(FilePickerController());
+  getTitle() {
+    Get.defaultDialog(
+        backgroundColor: SolidColors.primaryColor,
+        titleStyle: const TextStyle(color: SolidColors.scaffoldBg),
+        radius: 8,
+        title: 'عنوان مقاله',
+        content: TextField(
+          controller: manageArticleSingleController.titleController,
+          keyboardType: TextInputType.text,
+          style: const TextStyle(color: SolidColors.seeMore),
+          decoration: const InputDecoration(hintText: 'اینجا بنویس'),
+        ),
+        confirm: ElevatedButton(
+            onPressed: () {
+              manageArticleSingleController.updateTitle();
+              Get.back();
+            },
+            child: const Text('ثبت')));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,14 +144,20 @@ class _ManageArticleSingleScreenState extends State<ManageArticleSingleScreen> {
                         ))),
                   ],
                 ),
-                SeeMore(
-                  bodyMargin: bodyMargin,
-                  themeData: themeData,
-                  text: 'ویرایش عنوان مقاله',
-                  icon: Assets.icons.bluePen.image(),
+                GestureDetector(
+                  onTap: () {
+                    //get title
+                    getTitle();
+                  },
+                  child: SeeMore(
+                    bodyMargin: bodyMargin,
+                    themeData: themeData,
+                    text: 'ویرایش عنوان مقاله',
+                    icon: Assets.icons.bluePen.image(),
+                  ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(20, 20, bodyMargin, 20),
+                  padding: EdgeInsets.fromLTRB(20, 20, bodyMargin * 0.8, 20),
                   child: Text(
                     manageArticleSingleController.articleModel.value.title!,
                     maxLines: 2,
@@ -146,7 +171,7 @@ class _ManageArticleSingleScreenState extends State<ManageArticleSingleScreen> {
                   icon: Assets.icons.bluePen.image(),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(20, 20, bodyMargin, 20),
+                  padding: EdgeInsets.fromLTRB(20, 20, bodyMargin * 0.8, 20),
                   child: HtmlWidget(
                     manageArticleSingleController.articleModel.value.content!,
                     textStyle: themeData.textTheme.caption,

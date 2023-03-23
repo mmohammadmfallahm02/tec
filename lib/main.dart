@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -54,6 +53,7 @@ class MyApp extends StatelessWidget {
               binding: ManageArticleBinding()),
         ],
         theme: lightTheme(),
+        // home: const SplashScreen());
         home: const SplashScreen());
   }
 
