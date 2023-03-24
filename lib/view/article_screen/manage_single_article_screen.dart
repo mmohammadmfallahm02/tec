@@ -10,6 +10,7 @@ import 'package:tec/controller/article_controller/list_article_controller.dart';
 import 'package:tec/controller/article_controller/manage_article_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/services/pick_file.dart';
+import 'package:tec/view/article_screen/article_content_editor.dart';
 import 'package:tec/view/article_screen/article_list_screen.dart';
 
 import '../../controller/file_controller.dart';
@@ -69,8 +70,9 @@ class _ManageArticleSingleScreenState extends State<ManageArticleSingleScreen> {
                               imageBuilder: (context, imageProvider) =>
                                   Image(image: imageProvider),
                               placeholder: (context, url) => const Loading(),
-                              errorWidget: (context, url, error) =>
-                                  Assets.images.singlePlaceHolder.image(),
+                              errorWidget: (context, url, error) => Assets
+                                  .images.singlePlaceHolder
+                                  .image(fit: BoxFit.cover),
                               fit: BoxFit.cover,
                             )
                           : Image.file(
@@ -164,11 +166,16 @@ class _ManageArticleSingleScreenState extends State<ManageArticleSingleScreen> {
                     style: themeData.textTheme.titleLarge,
                   ),
                 ),
-                SeeMore(
-                  bodyMargin: bodyMargin,
-                  themeData: themeData,
-                  text: 'ویرایش متن اصلی مقاله',
-                  icon: Assets.icons.bluePen.image(),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const ArticleContentEditor());
+                  },
+                  child: SeeMore(
+                    bodyMargin: bodyMargin,
+                    themeData: themeData,
+                    text: 'ویرایش متن اصلی مقاله',
+                    icon: Assets.icons.bluePen.image(),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(20, 20, bodyMargin * 0.8, 20),
