@@ -35,8 +35,10 @@ class _ArticleContentEditorState extends State<ArticleContentEditor> {
                   initialText: manageArticleSingleController
                       .articleModel.value.content!),
               callbacks: Callbacks(
-                onChangeContent: (p0) => manageArticleSingleController
-                    .articleModel.value.content = p0,
+                onChangeContent: (p0) =>
+                    manageArticleSingleController.articleModel.update((val) {
+                  val?.content = p0;
+                }),
               ),
             )
           ],

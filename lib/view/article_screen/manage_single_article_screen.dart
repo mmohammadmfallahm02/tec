@@ -6,13 +6,11 @@ import 'package:get/get.dart';
 import 'package:tec/component/dimens.dart';
 import 'package:tec/constant/my_color.dart';
 import 'package:tec/component/my_component.dart';
-import 'package:tec/controller/article_controller/list_article_controller.dart';
 import 'package:tec/controller/article_controller/manage_article_controller.dart';
+import 'package:tec/controller/home_screen_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/services/pick_file.dart';
 import 'package:tec/view/article_screen/article_content_editor.dart';
-import 'package:tec/view/article_screen/article_list_screen.dart';
-
 import '../../controller/file_controller.dart';
 
 class ManageArticleSingleScreen extends StatefulWidget {
@@ -187,64 +185,102 @@ class _ManageArticleSingleScreenState extends State<ManageArticleSingleScreen> {
                         const Loading(),
                   ),
                 ),
-                SeeMore(
-                  bodyMargin: bodyMargin,
-                  themeData: themeData,
-                  text: 'انتخاب دسته بندی ',
-                  icon: Assets.icons.bluePen.image(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: SizedBox(
-                    height: 55,
-                    child: ListView.builder(
-                        itemCount: manageArticleSingleController.tagList.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          final tag =
-                              manageArticleSingleController.tagList[index];
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () async {
-                                await Get.find<ListArticleController>()
-                                    .getArticleListWithTagId(
-                                  tag.id!,
-                                );
-                                Get.to(ArticleListScreen(title: tag.title!));
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: SolidColors.surfaceColor,
-                                    borderRadius: BorderRadius.circular(18)),
-                                height: 55,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 16, left: 16),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        tag.title!,
-                                        style: themeData.textTheme.headline4,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        }),
+                GestureDetector(
+                  onTap: () {
+                    chooseCatBottomSheet(themeData);
+                  },
+                  child: SeeMore(
+                    bodyMargin: bodyMargin,
+                    themeData: themeData,
+                    text: 'انتخاب دسته بندی ',
+                    icon: Assets.icons.bluePen.image(),
                   ),
                 ),
-                const SizedBox(
-                  height: 32,
-                )
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20, 20, bodyMargin * 0.8, 20),
+                  child: HtmlWidget(
+                    manageArticleSingleController.articleModel.value.catName ??
+                        'هیچ دسته بندی انتخاب نشده',
+                    textStyle: themeData.textTheme.caption,
+                    enableCaching: true,
+                    onLoadingBuilder: (context, element, loadingProgress) =>
+                        const Loading(),
+                  ),
+                ),
               ])),
         ),
       ),
     );
+  }
+
+  Widget cats(ThemeData themeData) {
+    var homeScreenController = Get.find<HomeScreenController>();
+    return SizedBox(
+      height: Get.height / 1.7,
+      child: GridView.builder(
+        itemCount: homeScreenController.tagsList.length,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) {
+          final tag = homeScreenController.tagsList[index];
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: () {
+                
+                manageArticleSingleController.articleModel.update((val) {
+                  val?.catId = tag.id;
+                  val?.catName = tag.title;
+                });
+
+                Get.back();
+              },
+              child: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: SolidColors.primaryColor,
+                    borderRadius: BorderRadius.circular(18)),
+                height: 55,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8, left: 8),
+                  child: Center(
+                    child: Text(
+                      tag.title!,
+                      style: themeData.textTheme.headline2,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3, crossAxisSpacing: 5, mainAxisSpacing: 5),
+      ),
+    );
+  }
+
+  chooseCatBottomSheet(ThemeData themeData) {
+    Get.bottomSheet(
+        Container(
+          height: Get.height / 1.5,
+          decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              )),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(children: [
+              const Text('انتخاب دسته بندی'),
+              const SizedBox(
+                height: 8,
+              ),
+              cats(themeData)
+            ]),
+          ),
+        ),
+        isScrollControlled: true,
+        persistent: true);
   }
 }
