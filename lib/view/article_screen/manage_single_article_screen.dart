@@ -55,7 +55,7 @@ class _ManageArticleSingleScreenState extends State<ManageArticleSingleScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Obx(() =>
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Stack(
                   children: [
                     SizedBox(
@@ -207,6 +207,13 @@ class _ManageArticleSingleScreenState extends State<ManageArticleSingleScreen> {
                         const Loading(),
                   ),
                 ),
+                ElevatedButton(
+                    onPressed: () async {
+                      await manageArticleSingleController.storeArticle();
+                    },
+                    child: Text(manageArticleSingleController.loading.value
+                        ? 'صبر کنید...'
+                        : 'ارسال مطلب'))
               ])),
         ),
       ),
@@ -226,7 +233,6 @@ class _ManageArticleSingleScreenState extends State<ManageArticleSingleScreen> {
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: () {
-                
                 manageArticleSingleController.articleModel.update((val) {
                   val?.catId = tag.id;
                   val?.catName = tag.title;

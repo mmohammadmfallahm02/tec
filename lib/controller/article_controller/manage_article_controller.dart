@@ -1,5 +1,11 @@
+import 'dart:developer';
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:tec/constant/commands.dart';
+import 'package:tec/constant/storage_const.dart';
+import 'package:tec/controller/file_controller.dart';
 import 'package:tec/models/article_info_model.dart';
 import 'package:tec/models/article_model.dart';
 import 'package:tec/models/tag_model.dart';
@@ -31,8 +37,10 @@ class ManageArticleController extends GetxController {
     // var response = await DioService().getMethod(
     //     ApiConstant.getArticlePublishedByMe +
     //         GetStorage().read(StorageKey.userId));
-    var response =
-        await DioService().getMethod('${ApiConstant.getArticlePublishedByMe}1');
+    var userId = GetStorage().read(StorageKey.userId);
+   
+    var response = await DioService()
+        .getMethod('${ApiUrlConstant.getArticlePublishedByMe}$userId');
     if (response.statusCode == 200) {
       response.data.forEach(
           (element) => articleList.add(ArticleModel.fromJson(element)));
@@ -46,4 +54,46 @@ class ManageArticleController extends GetxController {
       val!.title = titleController.text;
     });
   }
+
+  storeArticle() async {
+    var fileController = Get.find<FilePickerController>();
+
+    loading.value = true;
+    Map<String, dynamic> map = {
+      ApiArticleKeyConstant.title: articleModel.value.title,
+      ApiArticleKeyConstant.content: articleModel.value.content,
+      ApiArticleKeyConstant.catId: articleModel.value.catId,
+      ApiArticleKeyConstant.userId: GetStorage().read(StorageKey.userId),
+      ApiArticleKeyConstant.image:
+          await dio.MultipartFile.fromFile(fileController.file.value.path!),
+      ApiArticleKeyConstant.command: Commands.store,
+      ApiArticleKeyConstant.tagList: "[]",
+    };
+
+    var response =
+        await DioService().postMethod(map, ApiUrlConstant.articlePost);
+    log(response.data.toString());
+    loading.value = false;
+  }
 }
+
+// storeArticle() async {
+  
+
+//   var fileController = Get.find<FilePickerController>();
+//   loading.value = true;
+//   Map<String, dynamic> map = {
+//       ApiArticleKeyConstant.title : articleInfoModel.value.title,
+//       ApiArticleKeyConstant.content : articleInfoModel.value.content,
+//       ApiArticleKeyConstant.catId :articleInfoModel.value.catId,
+//       ApiArticleKeyConstant.userId : GetStorage().read(StorageKey.userId),
+//       ApiArticleKeyConstant.image : await dio.MultipartFile.fromFile(fileController.file.value.path!),
+//       ApiArticleKeyConstant.command : Commands.store,
+//       ApiArticleKeyConstant.tagList : "[]"
+ 
+//   };
+//   var response = await DioService().postMethod(map, ApiUrlConstant.articlePost);
+//   log(response.data.toString());
+//   loading.value = false;
+
+// }

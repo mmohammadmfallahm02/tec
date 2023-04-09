@@ -13,7 +13,6 @@ class PodcastModel {
   PodcastModel({
     required this.id,
     required this.title,
-    required this.poster,
     required this.catName,
     required this.author,
     required this.view,
@@ -21,13 +20,15 @@ class PodcastModel {
     required this.createdAt,
   });
 
-  PodcastModel.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        title = json['title'],
-        poster = ApiConstant.hostDlUrl + json['poster'],
-        catName = json['cat_name'],
-        author = json['author'],
-        view = json['view'],
-        status = json['status'],
-        createdAt = json['created_at'];
+  PodcastModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    poster =
+        json['poster'] != null ? ApiUrlConstant.hostDlUrl + json['poster'] : '';
+    catName = json['cat_name'];
+    author = json['author'];
+    view = json['view'];
+    status = json['status'];
+    createdAt = json['created_at'];
+  }
 }

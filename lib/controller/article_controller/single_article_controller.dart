@@ -19,7 +19,7 @@ class SingleArticleController extends GetxController {
     // TODO user id is hard code
     var userId = '';
     var response = await DioService().getMethod(
-        '${ApiConstant.baseUrl}article/get.php?command=info&id=$id&user_id=$userId');
+        '${ApiUrlConstant.baseUrl}article/get.php?command=info&id=$id&user_id=$userId');
     if (response.statusCode == 200) {
       articleInfoModel.value = ArticleInfoModel.fromJson(response.data);
       tagsList.clear();

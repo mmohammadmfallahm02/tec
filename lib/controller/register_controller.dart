@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tec/constant/api_constant.dart';
-import 'package:tec/component/storage_const.dart';
+import 'package:tec/constant/storage_const.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/main.dart';
 import 'package:tec/services/dio_service.dart';
@@ -21,7 +21,8 @@ class RegisterController extends GetxController {
       'command': 'register'
     };
 
-    var response = await DioService().postMethod(map, ApiConstant.postRegister);
+    var response =
+        await DioService().postMethod(map, ApiUrlConstant.postRegister);
     email = emailController.text;
     userId = response.data['user_id'];
     // debugPrint(response);
@@ -35,7 +36,8 @@ class RegisterController extends GetxController {
       'command': 'verify'
     };
     // debugPrint(map.toString());
-    var response = await DioService().postMethod(map, ApiConstant.postRegister);
+    var response =
+        await DioService().postMethod(map, ApiUrlConstant.postRegister);
     // debugPrint(response.data);
     var status = response.data['response'];
 

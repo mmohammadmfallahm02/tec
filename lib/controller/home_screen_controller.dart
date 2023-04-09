@@ -20,7 +20,7 @@ class HomeScreenController extends GetxController {
 
   getHomeItem() async {
     loading.value = true;
-    var response = await DioService().getMethod(ApiConstant.getHomeItem);
+    var response = await DioService().getMethod(ApiUrlConstant.getHomeItem);
 
     if (response.statusCode == 200) {
       poster.value = PosterModel.fromJson(response.data['poster']);
