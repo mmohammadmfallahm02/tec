@@ -52,10 +52,13 @@ class MyApp extends StatelessWidget {
               name: NamedRoute.routeManageArticleSingleScreen,
               page: () => const ManageArticleSingleScreen(),
               binding: ManageArticleBinding()),
+          GetPage(
+            name: NamedRoute.routeSinglePodcastScreen,
+            page: () =>  SinglePodcast(),
+          )
         ],
         theme: lightTheme(),
-        // home: const SplashScreen());
-        home: const SinglePodcast());
+        home: const SplashScreen());
   }
 
   ThemeData lightTheme() {
@@ -139,8 +142,10 @@ class MyApp extends StatelessWidget {
 }
 
 class NamedRoute {
+  NamedRoute._();
   static String routeMainScreen = '/MainScreen';
   static String routeArticleSingleScreen = '/ArticleSingleScreen';
   static String routeManageArticleScreen = '/ManageArticle';
   static String routeManageArticleSingleScreen = '/ManageArticleSingle';
+  static String routeSinglePodcastScreen = '/SinglePodcast';
 }

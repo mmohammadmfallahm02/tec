@@ -8,7 +8,9 @@ import 'package:tec/controller/home_screen_controller.dart';
 import 'package:tec/controller/article_controller/list_article_controller.dart';
 import 'package:tec/controller/article_controller/single_article_controller.dart';
 import 'package:tec/gen/assets.gen.dart';
+import 'package:tec/main.dart';
 import 'package:tec/view/article_screen/article_list_screen.dart';
+import 'package:tec/view/podcast_screen/single_podcast_screen.dart';
 
 import '../../models/fake_data.dart';
 
@@ -189,29 +191,35 @@ class HomeScreen extends StatelessWidget {
               return Padding(
                 padding:
                     EdgeInsets.fromLTRB(4, 8, index == 0 ? bodyMargin : 16, 8),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: size.height / 6.5,
-                      width: size.width / 3.2,
-                      child: CachedNetworkImage(
-                        imageUrl: podcast.poster!,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(18),
-                              image: DecorationImage(
-                                  image: imageProvider, fit: BoxFit.cover)),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.toNamed(NamedRoute.routeSinglePodcastScreen,
+                        arguments: podcast);
+                  },
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: size.height / 6.5,
+                        width: size.width / 3.2,
+                        child: CachedNetworkImage(
+                          imageUrl: podcast.poster!,
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(18),
+                                image: DecorationImage(
+                                    image: imageProvider, fit: BoxFit.cover)),
+                          ),
+                          placeholder: (context, url) => const Loading(),
+                          errorWidget: (context, url, error) =>
+                              myErrorImageWidget(),
                         ),
-                        placeholder: (context, url) => const Loading(),
-                        errorWidget: (context, url, error) =>
-                            myErrorImageWidget(),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(podcast.title!)
-                  ],
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(podcast.title!)
+                    ],
+                  ),
                 ),
               );
             }),
@@ -327,4 +335,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,12 +7,22 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tec/component/decorations.dart';
 import 'package:tec/component/dimens.dart';
+import 'package:tec/controller/podcast_controller/single_podcast_controller.dart';
+import 'package:tec/models/podcast_model.dart';
 import '../../component/my_component.dart';
 import '../../constant/my_color.dart';
 import '../../gen/assets.gen.dart';
+import '../../models/podcast_file_model.dart';
 
+// ignore: must_be_immutable
 class SinglePodcast extends StatelessWidget {
-  const SinglePodcast({super.key});
+  late SinglePodcastController singlePodcastController;
+  late PodcastModel podcastModel;
+  SinglePodcast({super.key}) {
+    podcastModel = Get.arguments;
+    singlePodcastController =
+        Get.put(SinglePodcastController(id: podcastModel.id));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +41,19 @@ class SinglePodcast extends StatelessWidget {
                     children: [
                       Stack(
                         children: [
-                          CachedNetworkImage(
-                              imageUrl:
-                                  'https://static.digiato.com/digiato/2023/04/a8124d0d2a0602a2f4bf9159325a455a1a09fd24-910x600.jpg',
-                              imageBuilder: (context, imageProvider) =>
-                                  Image(image: imageProvider),
-                              placeholder: (context, url) => const Loading(),
-                              errorWidget: (context, url, error) =>
-                                  Assets.images.singlePlaceHolder.image()),
+                          SizedBox(
+                            height: Get.height / 3,
+                            width: double.infinity,
+                            child: CachedNetworkImage(
+                                imageUrl: podcastModel.poster!,
+                                imageBuilder: (context, imageProvider) => Image(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
+                                    ),
+                                placeholder: (context, url) => const Loading(),
+                                errorWidget: (context, url, error) =>
+                                    Assets.images.singlePlaceHolder.image()),
+                          ),
                           Positioned(
                               top: 0,
                               left: 0,
@@ -85,7 +102,7 @@ class SinglePodcast extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'عنوان پادکست',
+                          podcastModel.title!,
                           maxLines: 2,
                           style: themeData.textTheme.titleLarge,
                         ),
@@ -99,7 +116,7 @@ class SinglePodcast extends StatelessWidget {
                               width: 16,
                             ),
                             Text(
-                              'ساسان صفری',
+                              podcastModel.author!,
                               style: themeData.textTheme.headline4,
                             ),
                             const SizedBox(
@@ -108,36 +125,42 @@ class SinglePodcast extends StatelessWidget {
                           ],
                         ),
                       ),
-                      ListView.builder(
-                          itemCount: 5,
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.all(8),
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  ImageIcon(
-                                    Image.asset(
-                                      Assets.icons.microphone.path,
-                                    ).image,
-                                    color: SolidColors.seeMore,
-                                  ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      'بخش چهارم: فریلنسر دیوانه',
-                                      style: themeData.textTheme.headline4,
+                      Obx(
+                        () => ListView.builder(
+                            itemCount:
+                                singlePodcastController.podcastEpisodes.length,
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(8),
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              final PodcastFileModel episode =
+                                  singlePodcastController
+                                      .podcastEpisodes[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    ImageIcon(
+                                      Image.asset(
+                                        Assets.icons.microphone.path,
+                                      ).image,
+                                      color: SolidColors.seeMore,
                                     ),
-                                  ),
-                                  const Text('22:00')
-                                ],
-                              ),
-                            );
-                          })
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        episode.title!,
+                                        style: themeData.textTheme.headline4,
+                                      ),
+                                    ),
+                                     Text('${episode.length!}00')
+                                  ],
+                                ),
+                              );
+                            }),
+                      )
                     ]),
               ),
             ),
