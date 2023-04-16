@@ -10,6 +10,7 @@ import 'package:tec/view/article_screen/article_single_screen.dart';
 import 'package:tec/view/article_screen/manage_article.dart';
 import 'package:tec/view/article_screen/manage_single_article_screen.dart';
 import 'package:tec/view/main_screen/main_screen.dart';
+import 'package:tec/view/podcast_screen/single_podcast_screen.dart';
 import 'package:tec/view/splash_screen.dart';
 
 void main() async {
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
         ],
         theme: lightTheme(),
         // home: const SplashScreen());
-        home: const SplashScreen());
+        home: const SinglePodcast());
   }
 
   ThemeData lightTheme() {

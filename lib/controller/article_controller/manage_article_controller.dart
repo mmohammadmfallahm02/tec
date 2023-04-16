@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -72,28 +71,7 @@ class ManageArticleController extends GetxController {
 
     var response =
         await DioService().postMethod(map, ApiUrlConstant.articlePost);
-    log(response.data.toString());
     loading.value = false;
   }
 }
 
-// storeArticle() async {
-  
-
-//   var fileController = Get.find<FilePickerController>();
-//   loading.value = true;
-//   Map<String, dynamic> map = {
-//       ApiArticleKeyConstant.title : articleInfoModel.value.title,
-//       ApiArticleKeyConstant.content : articleInfoModel.value.content,
-//       ApiArticleKeyConstant.catId :articleInfoModel.value.catId,
-//       ApiArticleKeyConstant.userId : GetStorage().read(StorageKey.userId),
-//       ApiArticleKeyConstant.image : await dio.MultipartFile.fromFile(fileController.file.value.path!),
-//       ApiArticleKeyConstant.command : Commands.store,
-//       ApiArticleKeyConstant.tagList : "[]"
- 
-//   };
-//   var response = await DioService().postMethod(map, ApiUrlConstant.articlePost);
-//   log(response.data.toString());
-//   loading.value = false;
-
-// }
