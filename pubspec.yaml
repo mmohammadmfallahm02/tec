@@ -53,6 +53,8 @@ dependencies:
   html_editor_enhanced: ^2.5.1
   fwfh_text_style: ^2.22.08+1
   percent_indicator: ^4.2.3
+  just_audio: ^0.9.32
+  audio_video_progress_bar: ^1.0.1
   
 dev_dependencies:
   flutter_test:
