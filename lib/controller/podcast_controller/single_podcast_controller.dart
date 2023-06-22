@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:tec/constant/api_constant.dart';
@@ -49,7 +48,7 @@ class SinglePodcastController extends GetxController {
 
   startProgress() {
     const tick = Duration(seconds: 1);
-    var duration = (player.duration!.inSeconds) - player.position.inSeconds;
+    int duration = (player.duration!.inSeconds) - player.position.inSeconds;
     if (timer != null) {
       if (timer!.isActive) {
         timer!.cancel();

@@ -1,11 +1,7 @@
-import 'dart:developer';
-
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tec/component/decorations.dart';
 import 'package:tec/component/dimens.dart';
@@ -49,7 +45,7 @@ class SinglePodcast extends StatelessWidget {
                                 imageUrl: podcastModel.poster!,
                                 imageBuilder: (context, imageProvider) => Image(
                                       image: imageProvider,
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fill,
                                     ),
                                 placeholder: (context, url) => const Loading(),
                                 errorWidget: (context, url, error) =>
@@ -178,14 +174,14 @@ class SinglePodcast extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 8,
+              bottom: 16,
               right: Dimens.bodyMargin,
               left: Dimens.bodyMargin,
               child: Container(
                 height: Get.height / 7,
                 decoration: MyDecoration.mainGradient,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -224,11 +220,11 @@ class SinglePodcast extends StatelessWidget {
                           GestureDetector(
                             onTap: () {
                               controller.player.playing
-                                  ? controller.player.pause()
-                                  : controller.player.play();
-                              controller.player.playing
                                   ? controller.timer!.cancel()
                                   : controller.startProgress();
+                              controller.player.playing
+                                  ? controller.player.pause()
+                                  : controller.player.play();
                               controller.startProgress();
                               controller.playState.value =
                                   controller.player.playing;
