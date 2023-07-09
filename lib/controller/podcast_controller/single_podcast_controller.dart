@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';

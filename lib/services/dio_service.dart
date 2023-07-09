@@ -1,3 +1,5 @@
+// ignore_for_file: body_might_complete_normally_catch_error
+
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -40,6 +42,7 @@ class DioService {
             options: Options(responseType: ResponseType.json, method: 'POST'))
         .then((response) {
       return response;
+    // ignore: body_might_complete_normally_catch_error
     }).catchError((error) {
        log(error.toString());
       if (error is DioError) {

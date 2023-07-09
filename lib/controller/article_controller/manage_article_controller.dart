@@ -69,6 +69,7 @@ class ManageArticleController extends GetxController {
       ApiArticleKeyConstant.tagList: "[]",
     };
 
+    // ignore: unused_local_variable
     var response =
         await DioService().postMethod(map, ApiUrlConstant.articlePost);
     loading.value = false;

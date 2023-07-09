@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +12,6 @@ import 'package:tec/controller/article_controller/single_article_controller.dart
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/main.dart';
 import 'package:tec/view/article_screen/article_list_screen.dart';
-import 'package:tec/view/podcast_screen/single_podcast_screen.dart';
 
 import '../../models/fake_data.dart';
 
