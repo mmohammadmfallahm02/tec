@@ -1,3 +1,4 @@
+
 import 'package:get/get.dart';
 import 'package:tec/constant/api_constant.dart';
 import 'package:tec/models/article_model.dart';
@@ -30,8 +31,14 @@ class ListArticleController extends GetxController {
     loading.value = true;
 
     // TODO get userId from getStorage ApiConstant.getArticleList+userId
-    var response = await DioService().getMethod(
-        '${ApiUrlConstant.baseUrl}article/get.php?command=get_articles_with_tag_id&tag_id=$id&user_id=1');
+    final queryParam = {
+      'command': 'get_articles_with_tag_id',
+      'tag_id': id,
+      'user_id': ''
+    };
+    final uri = Uri.https("techblog.sasansafari.com",
+        "/Techblog/api/article/get.php", queryParam);
+    var response = await DioService().getMethod(uri.toString());
     if (response.statusCode == 200) {
       response.data.forEach(
           (element) => articleList.add(ArticleModel.fromJson(element)));
