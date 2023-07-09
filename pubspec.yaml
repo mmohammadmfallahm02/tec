@@ -45,7 +45,7 @@ dependencies:
   get: ^4.6.5
   url_launcher: ^6.1.9
   share_plus: ^6.3.0
-  dio: ^4.0.6
+  dio: ^5.2.1+1
   cached_network_image: ^3.2.3
   flutter_widget_from_html: ^0.9.1
   get_storage: ^2.1.1
