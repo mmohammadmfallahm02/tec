@@ -1,4 +1,4 @@
-// ignore_for_file: body_might_complete_normally_catch_error
+// ignore_for_file: body_might_complete_normally_catch_error, duplicate_ignore
 
 import 'dart:developer';
 

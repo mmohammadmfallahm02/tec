@@ -139,6 +139,7 @@ class SinglePodcast extends StatelessWidget {
                                       .seek(Duration.zero, index: index);
                                   controller.currentFileIndex.value =
                                       controller.player.currentIndex!;
+                                  controller.timerCheck();
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -197,11 +198,18 @@ class SinglePodcast extends StatelessWidget {
                           progress: controller.progressValue.value,
                           buffered: controller.bufferedValue.value,
                           total: controller.player.duration ?? Duration.zero,
-                          onSeek: (position) {
+                          onSeek: (position) async {
                             controller.player.seek(position);
-                            controller.player.playing
-                                ? controller.startProgress()
-                                : controller.timer!.cancel();
+
+                            if (controller.player.playing) {
+                              controller.startProgress();
+                            } else if (position <= Duration.zero) {
+                              await controller.player.seekToNext();
+                              controller.currentFileIndex.value =
+                                  controller.player.currentIndex!;
+                              controller.timerCheck();
+                              
+                            }
                           },
                         ),
                       ),
@@ -213,6 +221,7 @@ class SinglePodcast extends StatelessWidget {
                               await controller.player.seekToNext();
                               controller.currentFileIndex.value =
                                   controller.player.currentIndex!;
+                              controller.timerCheck();
                             },
                             child: const Icon(
                               Icons.skip_next,
@@ -227,7 +236,6 @@ class SinglePodcast extends StatelessWidget {
                               controller.player.playing
                                   ? controller.player.pause()
                                   : controller.player.play();
-                              controller.startProgress();
                               controller.playState.value =
                                   controller.player.playing;
                               controller.currentFileIndex.value =
@@ -248,6 +256,7 @@ class SinglePodcast extends StatelessWidget {
                               await controller.player.seekToPrevious();
                               controller.currentFileIndex.value =
                                   controller.player.currentIndex!;
+                              controller.timerCheck();
                             },
                             child: const Icon(
                               Icons.skip_previous,

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'dart:async';
+import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:tec/constant/api_constant.dart';
@@ -59,6 +60,7 @@ class SinglePodcastController extends GetxController {
     }
     timer = Timer.periodic(tick, (timer) {
       duration--;
+      log('duration: $duration ====> index: ${player.currentIndex}');
       progressValue.value = player.position;
       bufferedValue.value = player.bufferedPosition;
       if (duration <= 0) {
@@ -67,6 +69,16 @@ class SinglePodcastController extends GetxController {
         bufferedValue.value = Duration.zero;
       }
     });
+  }
+
+  timerCheck() {
+    if (player.playing) {
+      startProgress();
+    } else {
+      timer!.cancel();
+      progressValue.value = Duration.zero;
+      bufferedValue.value = Duration.zero;
+    }
   }
 
   setLoopMode() {
