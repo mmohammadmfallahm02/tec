@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:tec/component/my_component.dart';
 import 'package:tec/controller/article_controller/list_article_controller.dart';
 import 'package:tec/controller/article_controller/single_article_controller.dart';
-import 'package:tec/main.dart';
+import 'package:tec/route_manager/names.dart';
 
 // ignore: must_be_immutable
 class ArticleListScreen extends StatelessWidget {
